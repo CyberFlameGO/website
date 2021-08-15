@@ -1,0 +1,10 @@
+---
+layout: layouts/home.njk
+permalink: /posts/
+---
+
+<h2>Archive</h2>
+<p>Every post I've published on this site ordered by date.
+
+{% set postslist = collections.posts %}
+{% include "postslist.njk" %}

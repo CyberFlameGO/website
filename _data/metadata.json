@@ -1,0 +1,19 @@
+{
+  "title": "WorldQL",
+  "url": "https://www.worldql.com/",
+  "description": "The spatial database for building real-time multiplayer games",
+  "feed": {
+    "subtitle": "The spatial database for building real-time multiplayer games",
+    "filename": "feed.xml",
+    "path": "/feed/feed.xml",
+    "id": "https://www.worldql.com/"
+  },
+  "jsonfeed": {
+    "path": "/feed/feed.json",
+    "url": "https://www.worldql.com/feed/feed.json"
+  },
+  "author": {
+    "name": "WorldQL Team",
+    "url": "https://www.worldql.com/about/"
+  }
+}

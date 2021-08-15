@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SYSK Random Episode Generator</title>
+  <meta name="description" content="An episode shuffler for Stuff You Should Know enthusiasts">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/css/index.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <link rel="stylesheet" href="/css/prism-base16-monokai.dark.css">
+  <link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="WorldQL">
+  <link rel="alternate" href="/feed/feed.json" type="application/json" title="WorldQL">
+</head>
+<body>
+
+<div class="welcome">
+  <header>
+    <div class="header-contents">
+      <div class="home"><a href="/">WorldQL</a></div>
+      <ul class="nav" style="display: flex; justify-content: center; flex-direction: column">
+        <div>
+            <li class="nav-item"><a
+                href="/">Home</a></li>
+            <li class="nav-item"><a
+                href="/about/">About</a></li>
+            <li class="nav-item"><a
+                href="https://www.zachleat.com/">Community</a></li>
+            <li class="nav-item"><a
+                href="https://www.zachleat.com/">Docs</a></li>
+        </div>
+      </ul>
+    </div>
+  </header>
+
+</div>
+
+<main class="tmpl-post">
+  
+<h1>SYSK Random Episode Generator</h1>
+Published Tuesday, April 13, 2021
+<h3 style="color: grey">An episode shuffler for Stuff You Should Know enthusiasts</h3>
+
+<div class="tmpl-post-contents">
+
+<div
+    style="border: 1px solid black; border-radius: 10px; width: 100%; padding: 10px; text-align: center; -webkit-box-shadow: 5px 5px 20px 5px rgba(0,0,0,0.67); box-shadow: 5px 5px 20px 5px rgba(0,0,0,0.67); line-height: 30px; margin-bottom: 30px;">
+    <div style="font-size: 18px; font-weight: bold;"><span id="episode-name"></span> <button
+            onclick="copyToClipboard()">Copy title</button></div>
+    <div style="font-size: 16px; margin-top: 10px;">
+        <div style="display: inline-block;"><b>Length</b>: <span id="episode-length"></span></div>
+        <div style="display: inline-block"><b>Release date</b>: <span id="episode-release-date"></span></div>
+    </div>
+    <div style="margin-top: 10px;">
+        <button style="background-color: green; color: white; padding: 10px; font-size: 18px;" onclick="pick()">Pick another
+            episode</button>
+    </div>
+    <div style="font-size: 12px; text-align: left;">
+        <a target="_blank" href="https://en.wikipedia.org/wiki/List_of_Stuff_You_Should_Know_episodes">Data sourced from
+            Wikipedia</a>
+    </div>
+</div>
+<p>Stuff You Should Know is my favorite podcast of all time. The show has an absolutely massive (1500+) back catalog of episodes. Unfortunately, neither Spotify nor Apple Podcasts has a shuffle feature for podcasts. As a result, I often find myself scrolling for a <em>reaaaaallllyy</em> long time when I'm trying to find an old episode I haven't listened to.</p>
+<p>To solve this, I made a little tool that picks a random SYSK episode so you can copy the title into your podcasts app. Hope you find it useful!</p>
+<p><a href="https://www.reddit.com/r/stuffyoushouldknow/comments/mq8fsu/i_love_listening_to_old_episodes_i_havent_heard/">Leave a comment on reddit</a></p>
+<script>
+const getJSON = async url => {
+  try {
+    const response = await fetch(url);
+    if(!response.ok) // check if response worked (no 404 errors etc...)
+      throw new Error(response.statusText);
+
+    const data = await response.json(); // get JSON from the response
+    return data; // returns a promise, which resolves to this data value
+  } catch(error) {
+    return error;
+  }
+}
+
+function getRndInteger(min, max) {
+  return Math.floor(Math.random() * (max - min) ) + min;
+}
+
+let episodes;
+
+const randomEp = () => {
+  return episodes[getRndInteger(0, episodes.length - 1)];
+}
+
+let current_random;
+
+const pick = () => {
+  current_random = randomEp();
+  document.querySelector('#episode-name').innerHTML = current_random.title;
+  document.querySelector('#episode-length').innerHTML = current_random.length;
+  document.querySelector('#episode-release-date').innerHTML = current_random.date.split('(')[0];
+}
+
+const copyToClipboard = () => {
+  const el = document.createElement('textarea');
+  el.value = current_random.title;
+  document.body.appendChild(el);
+  el.select();
+  document.execCommand('copy');
+  document.body.removeChild(el);
+};
+
+(async () => {
+  episodes = await getJSON('/misc/sysk_episodes.json');
+  pick();
+})();
+
+</script>
+
+
+</div>
+
+<hr>
+<ul><li>Next: <a href="/posts/2021-04-java-underrated/">Java is criminally underhyped</a></li><li>Previous: <a href="/posts/2021-04-ffmpeg-for-web/">The correct configuration options to compress videos for the web with ffmpeg</a></li>
+</ul>
+
+
+</main>
+
+<footer></footer>
+
+<!-- Current page: /posts/2021-04-sysk-shuffler/ -->
+</body>
+</html>

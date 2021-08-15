@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The correct configuration options to compress videos for the web with ffmpeg</title>
+  <meta name="description" content="Why isn&#39;t my encoded video playing in modern browsers?">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/css/index.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <link rel="stylesheet" href="/css/prism-base16-monokai.dark.css">
+  <link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="WorldQL">
+  <link rel="alternate" href="/feed/feed.json" type="application/json" title="WorldQL">
+</head>
+<body>
+
+<div class="welcome">
+  <header>
+    <div class="header-contents">
+      <div class="home"><a href="/">WorldQL</a></div>
+      <ul class="nav" style="display: flex; justify-content: center; flex-direction: column">
+        <div>
+            <li class="nav-item"><a
+                href="/">Home</a></li>
+            <li class="nav-item"><a
+                href="/about/">About</a></li>
+            <li class="nav-item"><a
+                href="https://www.zachleat.com/">Community</a></li>
+            <li class="nav-item"><a
+                href="https://www.zachleat.com/">Docs</a></li>
+        </div>
+      </ul>
+    </div>
+  </header>
+
+</div>
+
+<main class="tmpl-post">
+  
+<h1>The correct configuration options to compress videos for the web with ffmpeg</h1>
+Published Sunday, April 11, 2021
+<h3 style="color: grey">Why isn&#39;t my encoded video playing in modern browsers?</h3>
+
+<div class="tmpl-post-contents">
+
+<p>The motivation of this post is to document the command-line options that worked for me to reduce the size of .mp4 files prior to publishing them on the web. Here they are!</p>
+<pre class="language-bash"><code class="language-bash">ffmpeg -i input.mp4 -vcodec h264 -acodec aac -strict -2 -crf <span class="token number">30</span> out.mp4</code></pre>
+<p>This output of this command is compatible with all modern browsers (Chrome, Firefox, Safari) and even works in IE11! The <code>-crf 30</code> flag tells ffmpeg to compress the output as much as possible, you can reduce the number for higher quality.</p>
+
+
+</div>
+
+<hr>
+<ul><li>Next: <a href="/posts/2021-04-sysk-shuffler/">SYSK Random Episode Generator</a></li><li>Previous: <a href="/posts/2021-02-11ty-setup/">Get rolling with 11ty and GitHub Pages in 5 minutes!</a></li>
+</ul>
+
+
+</main>
+
+<footer></footer>
+
+<!-- Current page: /posts/2021-04-ffmpeg-for-web/ -->
+</body>
+</html>

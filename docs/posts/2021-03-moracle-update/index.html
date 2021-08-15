@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Moracle development update</title>
+  <meta name="description" content="Learnings from the past year and a new approach to meeting the data needs of blockchain applications">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/css/index.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <link rel="stylesheet" href="/css/prism-base16-monokai.dark.css">
+  <link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="WorldQL">
+  <link rel="alternate" href="/feed/feed.json" type="application/json" title="WorldQL">
+</head>
+<body>
+
+<div class="welcome">
+  <header>
+    <div class="header-contents">
+      <div class="home"><a href="/">WorldQL</a></div>
+      <ul class="nav" style="display: flex; justify-content: center; flex-direction: column">
+        <div>
+            <li class="nav-item"><a
+                href="/">Home</a></li>
+            <li class="nav-item"><a
+                href="/about/">About</a></li>
+            <li class="nav-item"><a
+                href="https://www.zachleat.com/">Community</a></li>
+            <li class="nav-item"><a
+                href="https://www.zachleat.com/">Docs</a></li>
+        </div>
+      </ul>
+    </div>
+  </header>
+
+</div>
+
+<main class="tmpl-post">
+  
+<h1>Moracle development update</h1>
+Published Saturday, March 27, 2021
+<h3 style="color: grey">Learnings from the past year and a new approach to meeting the data needs of blockchain applications</h3>
+
+<div class="tmpl-post-contents">
+
+<h2 id="what-is-moracle%3F">What is Moracle? <a class="direct-link" href="#what-is-moracle%3F">#</a></h2>
+<p>Moracle is a <a href="https://academy.binance.com/en/articles/blockchain-oracles-explained" target="_blank">decentralized software oracle</a> (click this link for a definition) built specifically for the <a target="_blank" href="https://lisk.io/sdk">Lisk SDK</a>.</p>
+<p>Developers using the Lisk SDK face the following problems:</p>
+<ol>
+<li>They cannot access external internet APIs within their applications.</li>
+<li>It's difficult to large amounts of structured data in the user asset data fields provided by the SDK. This makes building more complicated applications such as a social networks or marketplaces difficult.</li>
+<li>Sending assets between chains is extremely difficult. This is particularly important because each Lisk application has its own blockchain.</li>
+</ol>
+<p>The project's goal is to solve these problems by giving developers the following capabilities:</p>
+<ol>
+<li>Access internet APIs from their blockchain applications. Eg. checking an asset price, state of an IoT device, or getting information from a centralized platform like GitHub. This is hence referred to as &quot;oracle functionality&quot;.</li>
+<li>Store larger amounts of information in an SQL database synced across all nodes.</li>
+<li>Allow developers to implement cross-chain asset swaps by utilizing an oracle to verify transactions on a foreign chain. This will allow, for example, NFTs issued on a custom blockchain to be securely purchased using the common Lisk token.</li>
+</ol>
+<h2 id="the-story-of-moracle-so-far">The story of Moracle so far <a class="direct-link" href="#the-story-of-moracle-so-far">#</a></h2>
+<p>I've been involved with the Lisk community since the summer of 2017. I published the first Moracle whitepaper in late 2017 and received a lot of helpful feedback from the community. During this time, I partnered with <a href="https://sidechainsolutions.io/">StellarDynamic</a> and he was incredible in supporting development and promotion of the project. A proof-of-concept notary service was released in December of 2018.</p>
+<p>During 2019, I discovered GraphQL while working at <a target="_blank" href="https://halp.com">Halp</a> and decided it was the best way to build an oracle service that delivers structured data in a reliable format. I decided to completely rewrite Moracle with a new design and strategy. The vision was to combine every data source into a single GraphQL schema, allowing developers to fetch information by embedding GraphQL queries in their transaction implementations. I submitted a <a href="https://www.youtube.com/watch?v=S4roWDIJRlM">demo</a> and then presented Moracle at Lisk.js 2019 (embedded below).</p>
+<div class="captionedimg">
+<iframe style="width: 90%" height="300" src="https://www.youtube.com/embed/_LjfZMRuCgU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe><br>
+</div>
+<p>After attending Lisk.js, I received the <a href="https://lisk.io/builders-program">Lisk Builders' Program</a> grant and have continued to work on Moracle throughout 2020. During this time, I did some contracting work for a company which wanted to use blockchain and was interested in using Moracle; they ended up pivoting to a centralized platform rather than a blockchain one, but it was a valuable experience regardless.</p>
+<p>The project has experienced some delays related to to my college course load and the pandemic, but I'm happy to announce that a robust oracle solution for the Lisk SDK will be here soon!</p>
+<h2 id="new-features">New features <a class="direct-link" href="#new-features">#</a></h2>
+<p>Moracle services now have <strong>enforced return types</strong>. This allows service validation logic to assume certain properties of a return value safely. These types are:</p>
+<table class="prettytable">
+<tr>
+<th>Type Name</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>JSON</td>
+<td>Most common, used for generic nested data objects of unknown ahead-of-time structure.</td>
+</tr>
+<tr>
+<td>Number</td>
+<td>A standard double-precision 64-bit IEEE 754 floating point number. This matches the native JavaScript <code>Number</code> type.</td>
+</tr>
+<tr>
+<td>String</td>
+<td>A standard byte sequence.</td>
+</tr>
+<tr>
+<td>Boolean</td>
+<td>A true/false value. Useful for situations in which oracle service nodes must vote on an outcome (see "democracy" consensus mode)</td>
+</tr>
+</table>
+<p>As a consequence of this new return type feature, Moracle now supports <strong>multiple consensus modes</strong> for accessing a variety of different internet API services. As Moracle provides a decentralized oracle service, multiple nodes can participate in the process of providing data to a blockchain app.</p>
+<p>An API lookup to fetch data on a particular cryptocurrency transaction will always return consistent information, allowing full consensus among nodes. However, a request for volatile information such as an asset price does not allow for full agreement. Additionally, some APIs are <em>stateful</em>, meaning multiple nodes attempting to send a request will result in unexpected or unwanted outcomes. Moracle offers the following consensus options:</p>
+<table class="prettytable">
+  <tr>
+    <th>Option</th>
+    <th>Compatible types</th>
+    <th>Compatible options</th>
+  </tr>
+  <tr>
+    <td>C - full consensus required, all nodes must produce the same outcome</td>
+    <td>All</td>
+    <td>T</td>
+  </tr>
+  <tr>
+    <td>T - trusted responders only, only allow nodes with a key approved by the developer to contribute a response</td>
+    <td>All</td>
+    <td>S, C, F, M, O, D (all)</td>
+  </tr>
+  <tr>
+    <td>F - first response wins, all nodes race to provide response, only the first response to the request shouldn't be ignored</td>
+    <td>All</td>
+    <td>S, T</td>
+  </tr>
+  <tr>
+    <td>S - single request required, only one node should execute the request prior to storing the results, useful for stateful APIs. This is different from F in that it ensures only one request is sent.</td>
+    <td>All</td>
+    <td>T</td>
+  </tr>
+  <tr>
+    <td>M - compute mean value of node results</td>
+    <td>Number, Boolean</td>
+    <td>T, O</td>
+  </tr>
+  <tr>
+    <td>O - discard outliars from a Number result set, used with mean value option</td>
+    <td>Number</td>
+    <td>M, T</td>
+  </tr>
+  <tr>
+    <td>D - democracy, the most popular value wins</td>
+    <td>Number, String, Boolean</td>
+    <td>T, O</td>
+  </tr>
+</table>
+<p>The options detailed above are combined to create a consensus mode. The <em>compatible options</em> column dictates which options can be used in the same mode. For example:</p>
+<ul>
+<li>FT - The first response is immediately taken as the correct result, the response must be signed by a key specified as trusted by the sidechain developer.</li>
+<li>MOT - The mean value from trusted nodes is returned after removing outliars (&gt;2 SD from mean).</li>
+<li>D - The most popular value is returned.</li>
+</ul>
+<p>This system allows developers building on the Lisk SDK simplicity and total flexibility in how their decentralized data providers work.</p>
+<h2 id="upcoming-releases">Upcoming releases <a class="direct-link" href="#upcoming-releases">#</a></h2>
+<h3 id="april-2021---moracle-transaction-library-%2B-service-executor-to-enable-oracle-functionality-%2B-documentation">April 2021 - Moracle transaction library + service executor to enable oracle functionality + documentation <a class="direct-link" href="#april-2021---moracle-transaction-library-%2B-service-executor-to-enable-oracle-functionality-%2B-documentation">#</a></h3>
+<p>This release differs from previous Moracle prototypes in two significant ways. The largest change is that a unified GraphQL schema for all data sources is no longer used. This approach made for a novel developer experience, but was too complicated and led to repetitive code. Rather than using GraphQL, <a href="https://lisk.io/documentation/lisk-sdk/guides/app-development/asset.html#applying-the-transaction-asset-logic">JavaScript transaction implementations</a> can use SQL syntax to read data. Additionally, a separate service which communicates with the Lisk node is used to execute requests made to data services rather than the Lisk node itself.</p>
+<p>This library will be ready-to-use in your dApp. However, this version will require decentralized app operators to operate their own oracle resolver services or solicit volunteers to do so. These services can simply be hosted on the same cloud server that hosts the Lisk node.</p>
+<h3 id="may-2021---moracle-ui.-easily-visualize-and-deploy-oracle-data-sources-for-your-decentralized-app">May 2021 - Moracle UI. Easily visualize and deploy oracle data sources for your decentralized app <a class="direct-link" href="#may-2021---moracle-ui.-easily-visualize-and-deploy-oracle-data-sources-for-your-decentralized-app">#</a></h3>
+<p>Node operators can provide multiple services to multiple blockchains simultaneously. For example, a Bitcoin price service may be useful for multiple sidechains or one complex sidechain may use multiple Moracle services.</p>
+<p>The Moracle UI allows operators and developers to easily create, manage, configure, and destroy data services.</p>
+<div class="captionedimg">
+<img src="/img/2021-03-27-MoracleUI.png">
+This dashboard allows developers and node operators to easily view and modify data sources for blockchain apps.
+</div>
+<p>I've learned a lot since 2019 and am striving to provide the best developer experience possible. This project has suffered from some significant delays, but it's <strong>still alive</strong> and will finally ready for developer use by May.</p>
+<p>I am looking forward to hearing your feedback over the next few months. Thanks to Lightcurve for making such an excellent SDK and the Lisk community for their interest in Moracle.</p>
+
+
+</div>
+
+<hr>
+<ul>
+</ul>
+
+
+</main>
+
+<footer></footer>
+
+<!-- Current page: /posts/2021-03-moracle-update/ -->
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Get rolling with 11ty and GitHub Pages in 5 minutes!</title>
+  <meta name="description" content="How I made this site with minimal hassle and configuration">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/css/index.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <link rel="stylesheet" href="/css/prism-base16-monokai.dark.css">
+  <link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="WorldQL">
+  <link rel="alternate" href="/feed/feed.json" type="application/json" title="WorldQL">
+</head>
+<body>
+
+<div class="welcome">
+  <header>
+    <div class="header-contents">
+      <div class="home"><a href="/">WorldQL</a></div>
+      <ul class="nav" style="display: flex; justify-content: center; flex-direction: column">
+        <div>
+            <li class="nav-item"><a
+                href="/">Home</a></li>
+            <li class="nav-item"><a
+                href="/about/">About</a></li>
+            <li class="nav-item"><a
+                href="https://www.zachleat.com/">Community</a></li>
+            <li class="nav-item"><a
+                href="https://www.zachleat.com/">Docs</a></li>
+        </div>
+      </ul>
+    </div>
+  </header>
+
+</div>
+
+<main class="tmpl-post">
+  
+<h1>Get rolling with 11ty and GitHub Pages in 5 minutes!</h1>
+Published Wednesday, February 3, 2021
+<h3 style="color: grey">How I made this site with minimal hassle and configuration</h3>
+
+<div class="tmpl-post-contents">
+
+<p>There are an abundance of static site generators available to users; choosing between them can seem overwhelming. Over my internet-inhabiting life, I've used Jekyll (remember <a href="http://octopress.org/">Octopress</a>?), Pelican, and a variety of less popular projects. Today, I believe <strong><a href="https://www.11ty.dev/">eleventy</a></strong> is the best choice you can make for a greenfield static site project.</p>
+<h2 id="why-choose-11ty-in-2021%3F">Why choose 11ty in 2021? <a class="direct-link" href="#why-choose-11ty-in-2021%3F">#</a></h2>
+<p>There are a few reasons why 11ty is the best choice for a blog in 2021:</p>
+<ul>
+<li>It's built for node.js. Most developers already have node and npm installed, so it's likely you won't have to install anything new to use it. A particular advantage is that you won't have to install Ruby (required for Jekyll) just to build your website.</li>
+<li>It uses the extremely mature <a href="https://mozilla.github.io/nunjucks/">Nunjucks</a> templating engine. If you've ever used jinja2 or the Django templating language, you'll feel right at home.</li>
+<li>The official eleventy starter projects are easy to customize and ruthlessly focused on performance.</li>
+</ul>
+<div class="captionedimg">
+<p><img src="/img/lh.png" alt="lighthouse scores"><br>
+Wow! Look at those Lighthouse scores!</p>
+</div>
+<h2 id="getting-started">Getting started <a class="direct-link" href="#getting-started">#</a></h2>
+<p>Start a stopwatch. This will actually only take 5 minutes.</p>
+<h3 id="step-1.-make-sure-you-have-node.js-and-npm-installed.">Step 1. Make sure you have node.js and npm installed. <a class="direct-link" href="#step-1.-make-sure-you-have-node.js-and-npm-installed.">#</a></h3>
+<p>You probably already have these. If not, instructions on installing them can be found <a href="https://docs.npmjs.com/downloading-and-installing-node-js-and-npm">here</a>.</p>
+<h3 id="step-2.-clone-an-11ty-starter-project-to-your-local-machine-and-install-the-dependencies.">Step 2. Clone an <a href="https://www.11ty.dev/docs/starter/">11ty starter project</a> to your local machine and install the dependencies. <a class="direct-link" href="#step-2.-clone-an-11ty-starter-project-to-your-local-machine-and-install-the-dependencies.">#</a></h3>
+<p>I'm going to be using the <code>eleventy-base-blog</code> starter, but you can use whichever strikes your fancy.</p>
+<pre class="language-bash"><code class="language-bash"><span class="token function">git</span> clone https://github.com/11ty/eleventy-base-blog myblog<br><span class="token builtin class-name">cd</span> myblog<br><span class="token function">npm</span> <span class="token function">install</span></code></pre>
+<h3 id="step-3.-build-your-site!">Step 3. Build your site! <a class="direct-link" href="#step-3.-build-your-site!">#</a></h3>
+<pre class="language-bash"><code class="language-bash">npx eleventy --serve</code></pre>
+<p>You should see a successful build output and a link to view your site at <a href="http://localhost:8080">http://localhost:8080</a>.</p>
+<h3 id="step-4.-configure-your-site-to-work-with-github-pages">Step 4. Configure your site to work with GitHub Pages <a class="direct-link" href="#step-4.-configure-your-site-to-work-with-github-pages">#</a></h3>
+<p>We're going to forgo setting up a GitHub Action to automatically build your site on GitHub's servers. Since you'll be building your site locally during development anyways, it makes sense to simply push the built HTML. GitHub Pages only supports serving from the root of a branch or a subdirectory named <code>docs</code>, so we're going to tell eleventy to build there instead of <code>_site</code>.</p>
+<p>First, make a directory for your build output</p>
+<pre class="language-bash"><code class="language-bash"><span class="token function">mkdir</span> docs</code></pre>
+<p>Next, open your <code>.eleventy.js</code> configuration file and change the output directory from <code>_site</code> to <code>docs</code>:</p>
+<pre class="language-js"><code class="language-js"><span class="highlight-line">dir<span class="token operator">:</span> <span class="token punctuation">{</span></span><br><span class="highlight-line">      input<span class="token operator">:</span> <span class="token string">"."</span><span class="token punctuation">,</span></span><br><span class="highlight-line">      includes<span class="token operator">:</span> <span class="token string">"_includes"</span><span class="token punctuation">,</span></span><br><span class="highlight-line">      data<span class="token operator">:</span> <span class="token string">"_data"</span><span class="token punctuation">,</span></span><br><mark class="highlight-line highlight-line-active">      output<span class="token operator">:</span> <span class="token string">"docs"</span></mark><br><span class="highlight-line"><span class="token punctuation">}</span></span></code></pre>
+<p>Finally, change the 404 path in the same file to reflect your new output folder as well:</p>
+<pre class="language-js"><code class="language-js"><span class="highlight-line">eleventyConfig<span class="token punctuation">.</span><span class="token function">setBrowserSyncConfig</span><span class="token punctuation">(</span><span class="token punctuation">{</span></span><br><span class="highlight-line">  callbacks<span class="token operator">:</span> <span class="token punctuation">{</span></span><br><span class="highlight-line">    <span class="token function-variable function">ready</span><span class="token operator">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">err<span class="token punctuation">,</span> browserSync</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span><br><mark class="highlight-line highlight-line-active">      <span class="token keyword">const</span> content_404 <span class="token operator">=</span> fs<span class="token punctuation">.</span><span class="token function">readFileSync</span><span class="token punctuation">(</span><span class="token string">'docs/404.html'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></mark><br><span class="highlight-line"></span><br><span class="highlight-line">      browserSync<span class="token punctuation">.</span><span class="token function">addMiddleware</span><span class="token punctuation">(</span><span class="token string">"*"</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">req<span class="token punctuation">,</span> res</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span></span><br><span class="highlight-line">        <span class="token comment">// Provides the 404 content without redirect.</span></span><br><span class="highlight-line">        res<span class="token punctuation">.</span><span class="token function">write</span><span class="token punctuation">(</span>content_404<span class="token punctuation">)</span><span class="token punctuation">;</span></span><br><span class="highlight-line">        res<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span><br><span class="highlight-line">      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span><br><span class="highlight-line">    <span class="token punctuation">}</span><span class="token punctuation">,</span></span><br><span class="highlight-line">  <span class="token punctuation">}</span><span class="token punctuation">,</span></span><br><span class="highlight-line">  ui<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span></span><br><span class="highlight-line">  ghostMode<span class="token operator">:</span> <span class="token boolean">false</span></span><br><span class="highlight-line"><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span></code></pre>
+<p>Now you're ready to publish to GitHub!</p>
+<h3 id="step-5.-push-to-github-and-enable-your-site!">Step 5. Push to GitHub and enable your site! <a class="direct-link" href="#step-5.-push-to-github-and-enable-your-site!">#</a></h3>
+<p>Create a new GitHub repository, update your cloned repository to point to it, and push the contents of your site!</p>
+<pre class="language-bash"><code class="language-bash"><span class="token function">git</span> remote remove origin<br><span class="token function">git</span> remote <span class="token function">add</span> origin <span class="token operator">&lt;</span>your-newly-created-git-repo-url<span class="token operator">></span><br><span class="token function">git</span> push --set-upstream origin master</code></pre>
+<p>You should see your files appear in your repository on GitHub. Now, all that's left is to publish it! Click the <em>Settings</em> tab on your repository, and scroll down to the <em>GitHub Pages</em> section. Under <em>Source</em>, select the <code>master</code> branch and choose the <code>docs</code> folder as the project root:</p>
+<div class="captionedimg">
+<p><img src="/img/githubpagessettings.png" alt="GitHub pages settings"><br>
+Your settings should look like this.</p>
+</div>
+<p>Hit &quot;Save&quot; and GitHub will publish your site. <strong>Congratulations, you've now got an eleventy blog running on GitHub Pages!</strong></p>
+<p>I hope that this tutorial was helpful, enjoy 11ty!</p>
+
+
+</div>
+
+<hr>
+<ul><li>Next: <a href="/posts/2021-04-ffmpeg-for-web/">The correct configuration options to compress videos for the web with ffmpeg</a></li>
+</ul>
+
+
+</main>
+
+<footer></footer>
+
+<!-- Current page: /posts/2021-02-11ty-setup/ -->
+</body>
+</html>

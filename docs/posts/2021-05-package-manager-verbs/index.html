@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Developers can&#39;t seem to agree on what command should get rid of a package</title>
+  <meta name="description" content="Every package manager should accept both &quot;uninstall&quot; and &quot;remove&quot; commands">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/css/index.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <link rel="stylesheet" href="/css/prism-base16-monokai.dark.css">
+  <link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="WorldQL">
+  <link rel="alternate" href="/feed/feed.json" type="application/json" title="WorldQL">
+</head>
+<body>
+
+<div class="welcome">
+  <header>
+    <div class="header-contents">
+      <div class="home"><a href="/">WorldQL</a></div>
+      <ul class="nav" style="display: flex; justify-content: center; flex-direction: column">
+        <div>
+            <li class="nav-item"><a
+                href="/">Home</a></li>
+            <li class="nav-item"><a
+                href="/about/">About</a></li>
+            <li class="nav-item"><a
+                href="https://www.zachleat.com/">Community</a></li>
+            <li class="nav-item"><a
+                href="https://www.zachleat.com/">Docs</a></li>
+        </div>
+      </ul>
+    </div>
+  </header>
+
+</div>
+
+<main class="tmpl-post">
+  
+<h1>Developers can&#39;t seem to agree on what command should get rid of a package</h1>
+Published Wednesday, May 26, 2021
+<h3 style="color: grey">Every package manager should accept both &quot;uninstall&quot; and &quot;remove&quot; commands</h3>
+
+<div class="tmpl-post-contents">
+
+<p><strong>Disclaimer</strong>: This blog post complains about something inconsequential and silly. However, it's worth talking about.</p>
+<p>Has this ever happened to you?</p>
+<pre class="language-bash"><code class="language-bash">$ <span class="token function">sudo</span> snap uninstall x<br>error: unknown <span class="token builtin class-name">command</span> <span class="token string">"uninstall"</span>, see <span class="token string">'snap help'</span><span class="token builtin class-name">.</span></code></pre>
+<p>Me too! I'm used to apt, so I often try to &quot;uninstall&quot; with snap when the correct verb is &quot;remove&quot;.</p>
+<p>Then I go work on a Python project and I do this:</p>
+<pre class="language-shell"><code class="language-shell">$ pip remove x<br>ERROR: unknown <span class="token builtin class-name">command</span> <span class="token string">"remove"</span></code></pre>
+<p>Whoops. pip uses &quot;uninstall&quot; just like apt. Then I connect to a machine running CentOS and try to uninstall a package using yum:</p>
+<pre class="language-shell"><code class="language-shell">$ yum uninstall x<br>No such command: uninstall. Please use /usr/bin/yum --help<br>It could be a YUM plugin command, try: <span class="token string">"yum install 'dnf-command(uninstall)'"</span></code></pre>
+<p>Oh, of course. yum uses &quot;remove&quot;.</p>
+<p>The only program I know of that does it right is npm, accepting both &quot;uninstall&quot; and &quot;remove&quot;. Why doesn't every package manager do this?</p>
+<p>In case you're curious, here are some other package managers:</p>
+<table class="prettytable">
+<tr>
+    <th>Package manager</th>
+    <th>Verb</th>
+</tr>
+<tr>
+    <td>Brew</td>
+    <td>uninstall</td>
+</tr>
+<tr>
+    <td>yay</td>
+    <td>-Rns 🙄</td>
+</tr>
+<tr>
+    <td>vcpkg</td>
+    <td>remove</td>
+</tr>
+<tr>
+    <td>cargo</td>
+    <td>uninstall</td>
+</tr>
+<tr>
+    <td>NuGet</td>
+    <td>delete</td>
+</tr>
+<tr>
+    <td>conda</td>
+    <td>remove (it makes me irrationally angry that this is different from pip)</td>
+</tr>
+<tr>
+    <td>yarn</td>
+    <td>remove (and only remove)</td>
+</tr>
+<tr>
+    <td>flatpak</td>
+    <td>uninstall</td>
+</tr>
+<tr>
+    <td>choco</td>
+    <td>uninstall</td>
+</tr>
+</table>
+<p>If you leave a comment with any more I'll add it to the table.</p>
+<h2 id="comments">Comments (62)</h2>
+<p>Discuss on <a href="https://www.reddit.com/r/programming/comments/nlb2c9/developers_cant_seem_to_agree_on_what_command/">Reddit</a> / <a href="https://news.ycombinator.com/item?id=27287455">Hacker News</a></p>
+
+
+</div>
+
+<hr>
+<ul><li>Previous: <a href="/posts/2021-04-java-underrated/">Java is criminally underhyped</a></li>
+</ul>
+
+
+</main>
+
+<footer></footer>
+
+<!-- Current page: /posts/2021-05-package-manager-verbs/ -->
+</body>
+</html>
