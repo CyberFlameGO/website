@@ -361,20 +361,33 @@ video {
   animation: fadeIn .5s ease-in both;
   animation-delay: .4s;
 }
+
 .fade-in4 {
   animation: fadeIn .3s ease-in both;
   animation-delay: .6s;
 }
 
 .case-study-box {
-  max-width: 1100px;
+  max-width: 950px;
   margin: 35px auto 25px auto;
   background-color: white;
   padding: 15px;
-  border-radius: 15px;
+  border-radius: 6px;
   text-align: center;
-  border: 3px dashed #cbcbcb;
+  border: 1px solid #cbcbcb;
   font-size: 18px;
+}
+
+p {
+  font-family: 'Atkinson Hyperlegible', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Atkinson Hyperlegible', sans-serif;
+}
+
+.landing-para {
+  font-size: 19px;
 }
 
 
@@ -385,3 +398,42 @@ video {
   background-position: top;
   font-family: 'Atkinson Hyperlegible', sans-serif;
 }
+
+.page-section {
+  max-width: 1000px;
+  margin: 0 auto 0 auto;
+  padding: 2rem;
+  position: relative;
+}
+
+.bg-cover {
+  background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.citation {
+  font-size: 14px;
+  margin-left: 3px;
+  margin-right: 3px;
+}
+
+.subtitle {
+  font-size: 1.5rem;
+  color: #5e0f57;
+  font-style: italic;
+  margin-top: 8px;
+  margin-bottom: 0px;
+}
+
+.author-and-date {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid gray;
+  margin-bottom: 25px;
+}
+

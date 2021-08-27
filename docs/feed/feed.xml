@@ -5,7 +5,7 @@
 	
 	<link href="https://www.worldql.com/feed/feed.xml" rel="self"/>
 	<link href="https://www.worldql.com/"/>
-	<updated>2021-05-26T00:00:00Z</updated>
+	<updated>2021-08-29T00:00:00Z</updated>
 	<id>https://www.worldql.com/</id>
 	<author>
 		<name>WorldQL Team</name>
@@ -13,250 +13,47 @@
 	</author>
 	
 	<entry>
-		<title>Developers can&#39;t seem to agree on what command should get rid of a package</title>
-		<link href="https://www.worldql.com/posts/2021-05-package-manager-verbs/"/>
-		<updated>2021-05-26T00:00:00Z</updated>
-		<id>https://www.worldql.com/posts/2021-05-package-manager-verbs/</id>
-		<content type="html">&lt;p&gt;&lt;strong&gt;Disclaimer&lt;/strong&gt;: This blog post complains about something inconsequential and silly. However, it&#39;s worth talking about.&lt;/p&gt;
-&lt;p&gt;Has this ever happened to you?&lt;/p&gt;
-&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;$ &lt;span class=&quot;token function&quot;&gt;sudo&lt;/span&gt; snap uninstall x&lt;br /&gt;error: unknown &lt;span class=&quot;token builtin class-name&quot;&gt;command&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;uninstall&quot;&lt;/span&gt;, see &lt;span class=&quot;token string&quot;&gt;&#39;snap help&#39;&lt;/span&gt;&lt;span class=&quot;token builtin class-name&quot;&gt;.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Me too! I&#39;m used to apt, so I often try to &amp;quot;uninstall&amp;quot; with snap when the correct verb is &amp;quot;remove&amp;quot;.&lt;/p&gt;
-&lt;p&gt;Then I go work on a Python project and I do this:&lt;/p&gt;
-&lt;pre class=&quot;language-shell&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;$ pip remove x&lt;br /&gt;ERROR: unknown &lt;span class=&quot;token builtin class-name&quot;&gt;command&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;remove&quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Whoops. pip uses &amp;quot;uninstall&amp;quot; just like apt. Then I connect to a machine running CentOS and try to uninstall a package using yum:&lt;/p&gt;
-&lt;pre class=&quot;language-shell&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;$ yum uninstall x&lt;br /&gt;No such command: uninstall. Please use /usr/bin/yum --help&lt;br /&gt;It could be a YUM plugin command, try: &lt;span class=&quot;token string&quot;&gt;&quot;yum install &#39;dnf-command(uninstall)&#39;&quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Oh, of course. yum uses &amp;quot;remove&amp;quot;.&lt;/p&gt;
-&lt;p&gt;The only program I know of that does it right is npm, accepting both &amp;quot;uninstall&amp;quot; and &amp;quot;remove&amp;quot;. Why doesn&#39;t every package manager do this?&lt;/p&gt;
-&lt;p&gt;In case you&#39;re curious, here are some other package managers:&lt;/p&gt;
-&lt;table class=&quot;prettytable&quot;&gt;
-&lt;tr&gt;
-    &lt;th&gt;Package manager&lt;/th&gt;
-    &lt;th&gt;Verb&lt;/th&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-    &lt;td&gt;Brew&lt;/td&gt;
-    &lt;td&gt;uninstall&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-    &lt;td&gt;yay&lt;/td&gt;
-    &lt;td&gt;-Rns 🙄&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-    &lt;td&gt;vcpkg&lt;/td&gt;
-    &lt;td&gt;remove&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-    &lt;td&gt;cargo&lt;/td&gt;
-    &lt;td&gt;uninstall&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-    &lt;td&gt;NuGet&lt;/td&gt;
-    &lt;td&gt;delete&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-    &lt;td&gt;conda&lt;/td&gt;
-    &lt;td&gt;remove (it makes me irrationally angry that this is different from pip)&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-    &lt;td&gt;yarn&lt;/td&gt;
-    &lt;td&gt;remove (and only remove)&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-    &lt;td&gt;flatpak&lt;/td&gt;
-    &lt;td&gt;uninstall&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-    &lt;td&gt;choco&lt;/td&gt;
-    &lt;td&gt;uninstall&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/table&gt;
-&lt;p&gt;If you leave a comment with any more I&#39;ll add it to the table.&lt;/p&gt;
-&lt;h2 id=&quot;comments&quot;&gt;Comments (62)&lt;/h2&gt;
-&lt;p&gt;Discuss on &lt;a href=&quot;https://www.reddit.com/r/programming/comments/nlb2c9/developers_cant_seem_to_agree_on_what_command/&quot;&gt;Reddit&lt;/a&gt; / &lt;a href=&quot;https://news.ycombinator.com/item?id=27287455&quot;&gt;Hacker News&lt;/a&gt;&lt;/p&gt;
-</content>
-	</entry>
-	
-	<entry>
-		<title>Java is criminally underhyped</title>
-		<link href="https://www.worldql.com/posts/2021-04-java-underrated/"/>
-		<updated>2021-04-15T00:00:00Z</updated>
-		<id>https://www.worldql.com/posts/2021-04-java-underrated/</id>
-		<content type="html">&lt;p&gt;It&#39;s likely that you read the title of this post and thought &amp;quot;what is this guy smoking? Java is everywhere!&amp;quot; You&#39;re correct, Java still dominates enterprise and runs some of the world&#39;s largest mission-critical applications. But Java&#39;s adoption isn&#39;t what I&#39;m talking about, I&#39;m talking about its &lt;em&gt;hype&lt;/em&gt;. I spend a lot of time around inexperienced programmers. And what do inexperienced programmers love doing? &lt;strong&gt;Getting excited and opinionated about tools like programming languages&lt;/strong&gt;. None of the CS undergrads I meet are hyped about Java but I think they should be.&lt;/p&gt;
-&lt;p&gt;Young/naive developers (myself included) often fall into the trap of fetishizing new languages and tools at the expense of productivity and sanity. Prior to working at Halp (now owned by $TEAM), I had a nearly romantic relationship with backend TypeScript. I thought the node.js ecosystem was the coolest thing ever: I loved the idea of transpiled code, live debugging, the massive package library, and even the weird and fragmented build systems. When I actually used it in production and spoke to more experienced engineers the magic quickly faded away.&lt;/p&gt;
-&lt;p&gt;I had a irrational affinity towards the JS ecosystem because it was the hot new thing; it had &lt;em&gt;hype&lt;/em&gt;. Reality did not live up to my expectations. Today, the wonderful things I expected from JavaScript I am currently enjoying as I gain experience in Java. &lt;strong&gt;I feel betrayed that hype did not lead me to Java sooner.&lt;/strong&gt; Java is fun to write, productive, and gets an unfair reputation among new developers as a dinosaur.&lt;/p&gt;
-&lt;h2 id=&quot;ergonomics-are-what-make-java-great&quot;&gt;Ergonomics are what make Java great &lt;a class=&quot;direct-link&quot; href=&quot;https://www.worldql.com/posts/2021-04-java-underrated/#ergonomics-are-what-make-java-great&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;This cannot be understated: Java simply feels good to write. A lot of this is due to the craftsmanship JetBrains puts into IntelliJ IDEA. Everything is autocompleted, jump-to-definition is fast, find-usage works well, and refactoring is easy. However, where Java truly shines is the &lt;strong&gt;developer experience with third-party libraries&lt;/strong&gt;.&lt;/p&gt;
-&lt;h3 id=&quot;dependency-heavy-workloads-and-industry-trends&quot;&gt;Dependency heavy workloads and industry trends &lt;a class=&quot;direct-link&quot; href=&quot;https://www.worldql.com/posts/2021-04-java-underrated/#dependency-heavy-workloads-and-industry-trends&quot;&gt;#&lt;/a&gt;&lt;/h3&gt;
-&lt;p&gt;My experience is limited, but I feel the winds have shifted in favor towards liberal usage of external dependencies. &lt;a href=&quot;https://en.wikipedia.org/wiki/Not_invented_here&quot;&gt;Not Invented Here&lt;/a&gt; is out, &lt;a href=&quot;https://en.wikipedia.org/wiki/Invented_here&quot;&gt;Not Invented There&lt;/a&gt; is in. JavaScript developers in particular are extremely likely to include third-party libraries even for &lt;a href=&quot;https://qz.com/646467/how-one-programmer-broke-the-internet-by-deleting-a-tiny-piece-of-code/&quot;&gt;trivial operations like left-padding a number&lt;/a&gt;. I don&#39;t think the current affinity for third-party dependencies is particularly harmful, but upstream API changes can wreak havoc on untyped JS/Python code bases.&lt;/p&gt;
-&lt;p&gt;When consuming third-party libraries in Java, you always know exactly what types need to be passed to a method. Most importantly, incorrect usage of a function will result in red squigglies in your editor. Given that heavy library usage is in, I think more people should be excited about Java.&lt;/p&gt;
-&lt;h3 id=&quot;nominal-typing-saves-time&quot;&gt;Nominal typing saves time &lt;a class=&quot;direct-link&quot; href=&quot;https://www.worldql.com/posts/2021-04-java-underrated/#nominal-typing-saves-time&quot;&gt;#&lt;/a&gt;&lt;/h3&gt;
-&lt;p&gt;There are a number of disadvantages with dynamic/duck/weak/whatever typing. When a dependency changes an API method and your application fails at runtime rather than build time that&#39;s a problem. When a developer has to refer back to the implementation of a method to figure out which types to pass it, that&#39;s a waste of time. TypeScript and Python type hints solve this problem a bit, but they lack the ability to validate passed types at runtime without extra code.&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;Type guards&lt;/em&gt; are my least favorite TypeScript feature. They&#39;re essentially duck typing that you have to implement yourself and &lt;strong&gt;trust&lt;/strong&gt; that they&#39;re implemented correctly. In my opinion, this is the worst of both worlds. Consider the following:&lt;/p&gt;
-&lt;pre class=&quot;language-typescript&quot;&gt;&lt;code class=&quot;language-typescript&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;Dog&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;br /&gt;    &lt;span class=&quot;token function-variable function&quot;&gt;bark&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;void&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;br /&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;br /&gt;&lt;br /&gt;&lt;span class=&quot;token comment&quot;&gt;/* The developer has to manually implement&lt;br /&gt;a heuristic check for interface adherence!&lt;br /&gt;When they update the interface, they have&lt;br /&gt;to update the type guards too! */&lt;/span&gt;&lt;br /&gt;&lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;isDog&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;pet&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; object&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; pet &lt;span class=&quot;token keyword&quot;&gt;is&lt;/span&gt; Dog &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;br /&gt;  &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;pet &lt;span class=&quot;token keyword&quot;&gt;as&lt;/span&gt; Dog&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;bark &lt;span class=&quot;token operator&quot;&gt;!==&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;undefined&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;br /&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;br /&gt;&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; dog&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;any&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token function-variable function&quot;&gt;bark&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&#39;woof&#39;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;br /&gt;&lt;br /&gt;&lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;isDog&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;dog&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;br /&gt;    &lt;span class=&quot;token comment&quot;&gt;// TS now knows that objects within this if statement are always type Dog&lt;/span&gt;&lt;br /&gt;    &lt;span class=&quot;token comment&quot;&gt;// This is because the type guard isDog narrowed down the type to Dog&lt;/span&gt;&lt;br /&gt;    dog&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;bark&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;br /&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;There&#39;s something about declaring a type AND having to write validation logic for said type that really rubs me the wrong way. The code above &lt;strong&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Code_smell&quot;&gt;smells&lt;/a&gt; like someone using the wrong tool&lt;/strong&gt;.&lt;/p&gt;
-&lt;p&gt;Unlike TypeScript definitions, Java&#39;s nominal type systems takes load off the programmer&#39;s brain by crystallizing type definitions and guaranteeing type guards by default.&lt;/p&gt;
-&lt;h3 id=&quot;removal-of-responsibility-for-optimization&quot;&gt;Removal of responsibility for optimization &lt;a class=&quot;direct-link&quot; href=&quot;https://www.worldql.com/posts/2021-04-java-underrated/#removal-of-responsibility-for-optimization&quot;&gt;#&lt;/a&gt;&lt;/h3&gt;
-&lt;p&gt;Java developers can confidently trust the JVM to do what&#39;s best. Whether they&#39;re implementing a multithreaded application or storing a large amount of data on the heap, they can be confident they won&#39;t shoot themselves in the foot with memory management or data races. This advantage is primarily in comparison to C++, which contains a multitude of footguns.&lt;/p&gt;
-&lt;p&gt;This is part of Java&#39;s ergonomic experience. When a developer has to worry less about technicalities they can focus more on the problem at hand.&lt;/p&gt;
-&lt;h3 id=&quot;a-holy-grail-of-productivity&quot;&gt;A holy grail of productivity &lt;a class=&quot;direct-link&quot; href=&quot;https://www.worldql.com/posts/2021-04-java-underrated/#a-holy-grail-of-productivity&quot;&gt;#&lt;/a&gt;&lt;/h3&gt;
-&lt;p&gt;How many languages can you think of that meet the following conditions?&lt;/p&gt;
+		<title>How we built an auto-scalable Minecraft server for 1000+ players using WorldQL&#39;s spatial database</title>
+		<link href="https://www.worldql.com/posts/2021-08-worldql-scalable-minecraft/"/>
+		<updated>2021-08-29T00:00:00Z</updated>
+		<id>https://www.worldql.com/posts/2021-08-worldql-scalable-minecraft/</id>
+		<content type="html">&lt;h2 id=&quot;minecraft&#39;s-multiplayer-performance-problems&quot;&gt;Minecraft&#39;s multiplayer performance problems &lt;a class=&quot;direct-link&quot; href=&quot;https://www.worldql.com/posts/2021-08-worldql-scalable-minecraft/#minecraft&#39;s-multiplayer-performance-problems&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Minecraft&#39;s server software is single-threaded, meaning it must process all events in the world sequentially on a single CPU core.
+Even on the most powerful computers a standard Minecraft server will struggle to keep up with over 200 players. Too many players attempting to load too much world will this cause the server &lt;a href=&quot;https://minecraft.fandom.com/wiki/Tick#Game_tick&quot;&gt;tick rate&lt;/a&gt; to plummet to unplayable levels.
+YouTuber SalC1 made a &lt;a href=&quot;https://www.youtube.com/watch?v=MBpN679o5Yk&quot;&gt;video&lt;/a&gt; talking about this issue which has garnered nearly a million views.&lt;/p&gt;
+&lt;p&gt;Back at the beginning of the 2020 quarantine I became interested in the idea of a supermassive Minecraft server, one with thousands of players unimpeded by lag.
+This was not possible at the time due to the limitations of Minecraft&#39;s server software, so I decided to build a way to share player load across multiple server processes. I named this project &amp;quot;Mammoth&amp;quot;.&lt;/p&gt;
+&lt;p&gt;My first attempt involved slicing the world into 1024 block-wide segments which were &amp;quot;owned&amp;quot; by different servers. Areas near the borders were synchronized and ridden entities such as horses or boats would be transferred across servers. &lt;a href=&quot;https://youtu.be/Q1RXHS4N6wg?t=60&quot;&gt;Here&#39;s a video on how it worked&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;It was a neat proof-of-concept, but it had some pretty serious issues.
+Players couldn&#39;t see each other across servers or interact. There was a jarring reconnect whenever crossing server borders.
+If one server was knocked offline, certain regions of the world became completely inaccessible. It had no way to mitigate lots of players in one area, meaning large-scale PvP was impossible. The experience simply wasn&#39;t great.&lt;/p&gt;
+&lt;p&gt;To actually solve the problem, something more robust was needed. I set the following goals:&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;Quality package manager and build system (I 💚 Maven)&lt;/li&gt;
-&lt;li&gt;Nominal typing&lt;/li&gt;
-&lt;li&gt;Large community&lt;/li&gt;
-&lt;li&gt;Hands-off optimization&lt;/li&gt;
+&lt;li&gt;Players must be able to see each other, even if on different server processes.&lt;/li&gt;
+&lt;li&gt;Players must be able to engage in combat across servers.&lt;/li&gt;
+&lt;li&gt;When a player places a block or updates a sign, it should be immediately visible to all other players.&lt;/li&gt;
+&lt;li&gt;If one server is down, the entire world should still be accessible.&lt;/li&gt;
+&lt;li&gt;If needed, servers can be added or removed at-will to adapt to the amount of players.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;I think the only qualifying tool is Java, but let me know if there are others!&lt;br /&gt;
-&lt;em&gt;&lt;strong&gt;edit:&lt;/strong&gt;&lt;/em&gt; As &lt;a href=&quot;https://www.reddit.com/r/programming/comments/mrrx9l/java_is_criminally_underhyped/guo7qrl/?utm_source=reddit&amp;amp;utm_medium=web2x&amp;amp;context=3&quot;&gt;Jwosty pointed out&lt;/a&gt; Microsoft&#39;s Java competitor C# has all these characteristics and more/newer language features. I have never used C# outside of the Unity game engine, but I&#39;m going to look into it.&lt;/p&gt;
-&lt;h2 id=&quot;surprising-absence-from-university-curriculum&quot;&gt;Surprising absence from university curriculum &lt;a class=&quot;direct-link&quot; href=&quot;https://www.worldql.com/posts/2021-04-java-underrated/#surprising-absence-from-university-curriculum&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;I currently attend the University of Colorado Boulder; it&#39;s a great school but we&#39;re certainly not known for CS. However, the majority of our upper-division computer science curriculum is shamelessly stolen from CMU or Stanford, assignments and all. During my time at CU, I&#39;ve used the following programming languages:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;C++. This language was chosen for all the required core courses: &lt;em&gt;Computer Systems&lt;/em&gt;, &lt;em&gt;Operating Systems&lt;/em&gt;, &lt;em&gt;Data Structures&lt;/em&gt;, etc. This language is a reasonable choice as it enables direct memory management, creation of kernel modules, and presents many challenges and learning opportunities.&lt;/li&gt;
-&lt;li&gt;Python and Julia. As you might expect, these languages were the darlings of numerical computation and discrete math professors.&lt;/li&gt;
-&lt;li&gt;Scala. This language was used in &lt;em&gt;Principles of Programming Languages&lt;/em&gt; instruction, primarily for its functional programming and pattern matching features. While Scala uses the JVM and interops with Java, it has a very different developer experience than Java.&lt;/li&gt;
-&lt;li&gt;Web languages (HTML/CSS/JS). These were only used in a single course called &lt;em&gt;Software Development Methods and Tools&lt;/em&gt; which focused on industry trends.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;I am graduating this semester and &lt;strong&gt;Java has not made a single appearance&lt;/strong&gt;; I think this is a shame.&lt;/p&gt;
-&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion &lt;a class=&quot;direct-link&quot; href=&quot;https://www.worldql.com/posts/2021-04-java-underrated/#conclusion&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;There is no One True Way to build applications, but I think that Java doesn&#39;t get enough attention particularly among startups and the newbie programming community. Untyped languages are useful tools, but I don&#39;t think they should be the default choice for building large applications. If you&#39;re a full-stack dev and have never extensively used Java, I think you&#39;ll be pleasantly surprised should you try it for your next project.&lt;/p&gt;
-&lt;p&gt;Java and the JVM were hyped to the moon in the 90&#39;s and early 2000&#39;s, but I don&#39;t think it should have ever died out! The developer experience I&#39;ve found with IntelliJ and Java is worth getting excited about.&lt;/p&gt;
-&lt;p&gt;I am curious why Java lost its hype in the first place. Programmer culture history is poorly documented and if you have insight, please &lt;a href=&quot;mailto:jacksonroberts25@gmail.com&quot;&gt;email me&lt;/a&gt; or leave a comment.&lt;/p&gt;
-&lt;h2 id=&quot;comments&quot;&gt;Comments (821)&lt;/h2&gt;
-&lt;p&gt;View comments on &lt;a href=&quot;https://www.reddit.com/r/programming/comments/mrrx9l/java_is_criminally_underhyped/&quot;&gt;reddit&lt;/a&gt; / &lt;a href=&quot;https://news.ycombinator.com/item?id=26827766&quot;&gt;Hacker News&lt;/a&gt; or &lt;a href=&quot;https://twitter.com/jacksondotsh&quot;&gt;follow me on Twitter&lt;/a&gt;&lt;/p&gt;
-</content>
-	</entry>
-	
-	<entry>
-		<title>SYSK Random Episode Generator</title>
-		<link href="https://www.worldql.com/posts/2021-04-sysk-shuffler/"/>
-		<updated>2021-04-13T00:00:00Z</updated>
-		<id>https://www.worldql.com/posts/2021-04-sysk-shuffler/</id>
-		<content type="html">&lt;div style=&quot;border: 1px solid black; border-radius: 10px; width: 100%; padding: 10px; text-align: center; -webkit-box-shadow: 5px 5px 20px 5px rgba(0,0,0,0.67); box-shadow: 5px 5px 20px 5px rgba(0,0,0,0.67); line-height: 30px; margin-bottom: 30px;&quot;&gt;
-    &lt;div style=&quot;font-size: 18px; font-weight: bold;&quot;&gt;&lt;span id=&quot;episode-name&quot;&gt;&lt;/span&gt; &lt;button onclick=&quot;copyToClipboard()&quot;&gt;Copy title&lt;/button&gt;&lt;/div&gt;
-    &lt;div style=&quot;font-size: 16px; margin-top: 10px;&quot;&gt;
-        &lt;div style=&quot;display: inline-block;&quot;&gt;&lt;b&gt;Length&lt;/b&gt;: &lt;span id=&quot;episode-length&quot;&gt;&lt;/span&gt;&lt;/div&gt;
-        &lt;div style=&quot;display: inline-block&quot;&gt;&lt;b&gt;Release date&lt;/b&gt;: &lt;span id=&quot;episode-release-date&quot;&gt;&lt;/span&gt;&lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div style=&quot;margin-top: 10px;&quot;&gt;
-        &lt;button style=&quot;background-color: green; color: white; padding: 10px; font-size: 18px;&quot; onclick=&quot;pick()&quot;&gt;Pick another
-            episode&lt;/button&gt;
-    &lt;/div&gt;
-    &lt;div style=&quot;font-size: 12px; text-align: left;&quot;&gt;
-        &lt;a target=&quot;_blank&quot; href=&quot;https://en.wikipedia.org/wiki/List_of_Stuff_You_Should_Know_episodes&quot;&gt;Data sourced from
-            Wikipedia&lt;/a&gt;
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;p&gt;Stuff You Should Know is my favorite podcast of all time. The show has an absolutely massive (1500+) back catalog of episodes. Unfortunately, neither Spotify nor Apple Podcasts has a shuffle feature for podcasts. As a result, I often find myself scrolling for a &lt;em&gt;reaaaaallllyy&lt;/em&gt; long time when I&#39;m trying to find an old episode I haven&#39;t listened to.&lt;/p&gt;
-&lt;p&gt;To solve this, I made a little tool that picks a random SYSK episode so you can copy the title into your podcasts app. Hope you find it useful!&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://www.reddit.com/r/stuffyoushouldknow/comments/mq8fsu/i_love_listening_to_old_episodes_i_havent_heard/&quot;&gt;Leave a comment on reddit&lt;/a&gt;&lt;/p&gt;
-&lt;script&gt;
-const getJSON = async url =&gt; {
-  try {
-    const response = await fetch(url);
-    if(!response.ok) // check if response worked (no 404 errors etc...)
-      throw new Error(response.statusText);
-
-    const data = await response.json(); // get JSON from the response
-    return data; // returns a promise, which resolves to this data value
-  } catch(error) {
-    return error;
-  }
-}
-
-function getRndInteger(min, max) {
-  return Math.floor(Math.random() * (max - min) ) + min;
-}
-
-let episodes;
-
-const randomEp = () =&gt; {
-  return episodes[getRndInteger(0, episodes.length - 1)];
-}
-
-let current_random;
-
-const pick = () =&gt; {
-  current_random = randomEp();
-  document.querySelector(&#39;#episode-name&#39;).innerHTML = current_random.title;
-  document.querySelector(&#39;#episode-length&#39;).innerHTML = current_random.length;
-  document.querySelector(&#39;#episode-release-date&#39;).innerHTML = current_random.date.split(&#39;(&#39;)[0];
-}
-
-const copyToClipboard = () =&gt; {
-  const el = document.createElement(&#39;textarea&#39;);
-  el.value = current_random.title;
-  document.body.appendChild(el);
-  el.select();
-  document.execCommand(&#39;copy&#39;);
-  document.body.removeChild(el);
-};
-
-(async () =&gt; {
-  episodes = await getJSON(&#39;/misc/sysk_episodes.json&#39;);
-  pick();
-})();
-
-&lt;/script&gt;
-</content>
-	</entry>
-	
-	<entry>
-		<title>The correct configuration options to compress videos for the web with ffmpeg</title>
-		<link href="https://www.worldql.com/posts/2021-04-ffmpeg-for-web/"/>
-		<updated>2021-04-11T00:00:00Z</updated>
-		<id>https://www.worldql.com/posts/2021-04-ffmpeg-for-web/</id>
-		<content type="html">&lt;p&gt;The motivation of this post is to document the command-line options that worked for me to reduce the size of .mp4 files prior to publishing them on the web. Here they are!&lt;/p&gt;
-&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;ffmpeg -i input.mp4 -vcodec h264 -acodec aac -strict -2 -crf &lt;span class=&quot;token number&quot;&gt;30&lt;/span&gt; out.mp4&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;This output of this command is compatible with all modern browsers (Chrome, Firefox, Safari) and even works in IE11! The &lt;code&gt;-crf 30&lt;/code&gt; flag tells ffmpeg to compress the output as much as possible, you can reduce the number for higher quality.&lt;/p&gt;
-</content>
-	</entry>
-	
-	<entry>
-		<title>Get rolling with 11ty and GitHub Pages in 5 minutes!</title>
-		<link href="https://www.worldql.com/posts/2021-02-11ty-setup/"/>
-		<updated>2021-02-03T00:00:00Z</updated>
-		<id>https://www.worldql.com/posts/2021-02-11ty-setup/</id>
-		<content type="html">&lt;p&gt;There are an abundance of static site generators available to users; choosing between them can seem overwhelming. Over my internet-inhabiting life, I&#39;ve used Jekyll (remember &lt;a href=&quot;http://octopress.org/&quot;&gt;Octopress&lt;/a&gt;?), Pelican, and a variety of less popular projects. Today, I believe &lt;strong&gt;&lt;a href=&quot;https://www.11ty.dev/&quot;&gt;eleventy&lt;/a&gt;&lt;/strong&gt; is the best choice you can make for a greenfield static site project.&lt;/p&gt;
-&lt;h2 id=&quot;why-choose-11ty-in-2021%3F&quot;&gt;Why choose 11ty in 2021? &lt;a class=&quot;direct-link&quot; href=&quot;https://www.worldql.com/posts/2021-02-11ty-setup/#why-choose-11ty-in-2021%3F&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;There are a few reasons why 11ty is the best choice for a blog in 2021:&lt;/p&gt;
+&lt;h2 id=&quot;worldql-is-born&quot;&gt;WorldQL is born &lt;a class=&quot;direct-link&quot; href=&quot;https://www.worldql.com/posts/2021-08-worldql-scalable-minecraft/#worldql-is-born&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;While early versions of Mammoth used redis as a backend, I had some new requirements if I needed to meet my goals.&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;It&#39;s built for node.js. Most developers already have node and npm installed, so it&#39;s likely you won&#39;t have to install anything new to use it. A particular advantage is that you won&#39;t have to install Ruby (required for Jekyll) just to build your website.&lt;/li&gt;
-&lt;li&gt;It uses the extremely mature &lt;a href=&quot;https://mozilla.github.io/nunjucks/&quot;&gt;Nunjucks&lt;/a&gt; templating engine. If you&#39;ve ever used jinja2 or the Django templating language, you&#39;ll feel right at home.&lt;/li&gt;
-&lt;li&gt;The official eleventy starter projects are easy to customize and ruthlessly focused on performance.&lt;/li&gt;
+&lt;li&gt;I needed fast message-passing based on proximity, so I could send the right updates to the right Minecraft servers (and eventually, clients).&lt;/li&gt;
+&lt;li&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class=&quot;captionedimg&quot;&gt;
-&lt;p&gt;&lt;img src=&quot;https://www.worldql.com/img/lh.png&quot; alt=&quot;lighthouse scores&quot; /&gt;&lt;br /&gt;
-Wow! Look at those Lighthouse scores!&lt;/p&gt;
-&lt;/div&gt;
-&lt;h2 id=&quot;getting-started&quot;&gt;Getting started &lt;a class=&quot;direct-link&quot; href=&quot;https://www.worldql.com/posts/2021-02-11ty-setup/#getting-started&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;Start a stopwatch. This will actually only take 5 minutes.&lt;/p&gt;
-&lt;h3 id=&quot;step-1.-make-sure-you-have-node.js-and-npm-installed.&quot;&gt;Step 1. Make sure you have node.js and npm installed. &lt;a class=&quot;direct-link&quot; href=&quot;https://www.worldql.com/posts/2021-02-11ty-setup/#step-1.-make-sure-you-have-node.js-and-npm-installed.&quot;&gt;#&lt;/a&gt;&lt;/h3&gt;
-&lt;p&gt;You probably already have these. If not, instructions on installing them can be found &lt;a href=&quot;https://docs.npmjs.com/downloading-and-installing-node-js-and-npm&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
-&lt;h3 id=&quot;step-2.-clone-an-11ty-starter-project-to-your-local-machine-and-install-the-dependencies.&quot;&gt;Step 2. Clone an &lt;a href=&quot;https://www.11ty.dev/docs/starter/&quot;&gt;11ty starter project&lt;/a&gt; to your local machine and install the dependencies. &lt;a class=&quot;direct-link&quot; href=&quot;https://www.worldql.com/posts/2021-02-11ty-setup/#step-2.-clone-an-11ty-starter-project-to-your-local-machine-and-install-the-dependencies.&quot;&gt;#&lt;/a&gt;&lt;/h3&gt;
-&lt;p&gt;I&#39;m going to be using the &lt;code&gt;eleventy-base-blog&lt;/code&gt; starter, but you can use whichever strikes your fancy.&lt;/p&gt;
-&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;token function&quot;&gt;git&lt;/span&gt; clone https://github.com/11ty/eleventy-base-blog myblog&lt;br /&gt;&lt;span class=&quot;token builtin class-name&quot;&gt;cd&lt;/span&gt; myblog&lt;br /&gt;&lt;span class=&quot;token function&quot;&gt;npm&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;install&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;h3 id=&quot;step-3.-build-your-site!&quot;&gt;Step 3. Build your site! &lt;a class=&quot;direct-link&quot; href=&quot;https://www.worldql.com/posts/2021-02-11ty-setup/#step-3.-build-your-site!&quot;&gt;#&lt;/a&gt;&lt;/h3&gt;
-&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;npx eleventy --serve&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;You should see a successful build output and a link to view your site at &lt;a href=&quot;http://localhost:8080/&quot;&gt;http://localhost:8080&lt;/a&gt;.&lt;/p&gt;
-&lt;h3 id=&quot;step-4.-configure-your-site-to-work-with-github-pages&quot;&gt;Step 4. Configure your site to work with GitHub Pages &lt;a class=&quot;direct-link&quot; href=&quot;https://www.worldql.com/posts/2021-02-11ty-setup/#step-4.-configure-your-site-to-work-with-github-pages&quot;&gt;#&lt;/a&gt;&lt;/h3&gt;
-&lt;p&gt;We&#39;re going to forgo setting up a GitHub Action to automatically build your site on GitHub&#39;s servers. Since you&#39;ll be building your site locally during development anyways, it makes sense to simply push the built HTML. GitHub Pages only supports serving from the root of a branch or a subdirectory named &lt;code&gt;docs&lt;/code&gt;, so we&#39;re going to tell eleventy to build there instead of &lt;code&gt;_site&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;First, make a directory for your build output&lt;/p&gt;
-&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;token function&quot;&gt;mkdir&lt;/span&gt; docs&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Next, open your &lt;code&gt;.eleventy.js&lt;/code&gt; configuration file and change the output directory from &lt;code&gt;_site&lt;/code&gt; to &lt;code&gt;docs&lt;/code&gt;:&lt;/p&gt;
-&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;highlight-line&quot;&gt;dir&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;/span&gt;&lt;br /&gt;&lt;span class=&quot;highlight-line&quot;&gt;      input&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;.&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;&lt;/span&gt;&lt;br /&gt;&lt;span class=&quot;highlight-line&quot;&gt;      includes&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;_includes&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;&lt;/span&gt;&lt;br /&gt;&lt;span class=&quot;highlight-line&quot;&gt;      data&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;_data&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;&lt;/span&gt;&lt;br /&gt;&lt;mark class=&quot;highlight-line highlight-line-active&quot;&gt;      output&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;docs&quot;&lt;/span&gt;&lt;/mark&gt;&lt;br /&gt;&lt;span class=&quot;highlight-line&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Finally, change the 404 path in the same file to reflect your new output folder as well:&lt;/p&gt;
-&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;highlight-line&quot;&gt;eleventyConfig&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;setBrowserSyncConfig&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;/span&gt;&lt;br /&gt;&lt;span class=&quot;highlight-line&quot;&gt;  callbacks&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;/span&gt;&lt;br /&gt;&lt;span class=&quot;highlight-line&quot;&gt;    &lt;span class=&quot;token function-variable function&quot;&gt;ready&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;err&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; browserSync&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;/span&gt;&lt;br /&gt;&lt;mark class=&quot;highlight-line highlight-line-active&quot;&gt;      &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; content_404 &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; fs&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;readFileSync&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&#39;docs/404.html&#39;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/mark&gt;&lt;br /&gt;&lt;span class=&quot;highlight-line&quot;&gt;&lt;/span&gt;&lt;br /&gt;&lt;span class=&quot;highlight-line&quot;&gt;      browserSync&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;addMiddleware&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;*&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;req&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; res&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;/span&gt;&lt;br /&gt;&lt;span class=&quot;highlight-line&quot;&gt;        &lt;span class=&quot;token comment&quot;&gt;// Provides the 404 content without redirect.&lt;/span&gt;&lt;/span&gt;&lt;br /&gt;&lt;span class=&quot;highlight-line&quot;&gt;        res&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;write&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;content_404&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/span&gt;&lt;br /&gt;&lt;span class=&quot;highlight-line&quot;&gt;        res&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;end&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/span&gt;&lt;br /&gt;&lt;span class=&quot;highlight-line&quot;&gt;      &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/span&gt;&lt;br /&gt;&lt;span class=&quot;highlight-line&quot;&gt;    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;&lt;/span&gt;&lt;br /&gt;&lt;span class=&quot;highlight-line&quot;&gt;  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;&lt;/span&gt;&lt;br /&gt;&lt;span class=&quot;highlight-line&quot;&gt;  ui&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;&lt;/span&gt;&lt;br /&gt;&lt;span class=&quot;highlight-line&quot;&gt;  ghostMode&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;false&lt;/span&gt;&lt;/span&gt;&lt;br /&gt;&lt;span class=&quot;highlight-line&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Now you&#39;re ready to publish to GitHub!&lt;/p&gt;
-&lt;h3 id=&quot;step-5.-push-to-github-and-enable-your-site!&quot;&gt;Step 5. Push to GitHub and enable your site! &lt;a class=&quot;direct-link&quot; href=&quot;https://www.worldql.com/posts/2021-02-11ty-setup/#step-5.-push-to-github-and-enable-your-site!&quot;&gt;#&lt;/a&gt;&lt;/h3&gt;
-&lt;p&gt;Create a new GitHub repository, update your cloned repository to point to it, and push the contents of your site!&lt;/p&gt;
-&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;token function&quot;&gt;git&lt;/span&gt; remote remove origin&lt;br /&gt;&lt;span class=&quot;token function&quot;&gt;git&lt;/span&gt; remote &lt;span class=&quot;token function&quot;&gt;add&lt;/span&gt; origin &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;your-newly-created-git-repo-url&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;&lt;br /&gt;&lt;span class=&quot;token function&quot;&gt;git&lt;/span&gt; push --set-upstream origin master&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;You should see your files appear in your repository on GitHub. Now, all that&#39;s left is to publish it! Click the &lt;em&gt;Settings&lt;/em&gt; tab on your repository, and scroll down to the &lt;em&gt;GitHub Pages&lt;/em&gt; section. Under &lt;em&gt;Source&lt;/em&gt;, select the &lt;code&gt;master&lt;/code&gt; branch and choose the &lt;code&gt;docs&lt;/code&gt; folder as the project root:&lt;/p&gt;
-&lt;div class=&quot;captionedimg&quot;&gt;
-&lt;p&gt;&lt;img src=&quot;https://www.worldql.com/img/githubpagessettings.png&quot; alt=&quot;GitHub pages settings&quot; /&gt;&lt;br /&gt;
-Your settings should look like this.&lt;/p&gt;
-&lt;/div&gt;
-&lt;p&gt;Hit &amp;quot;Save&amp;quot; and GitHub will publish your site. &lt;strong&gt;Congratulations, you&#39;ve now got an eleventy blog running on GitHub Pages!&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;I hope that this tutorial was helpful, enjoy 11ty!&lt;/p&gt;
+&lt;h2 id=&quot;part-1%3A-synchronizing-player-positions&quot;&gt;Part 1: Synchronizing player positions &lt;a class=&quot;direct-link&quot; href=&quot;https://www.worldql.com/posts/2021-08-worldql-scalable-minecraft/#part-1%3A-synchronizing-player-positions&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;This uses WorldQL subscriptions and messages. These are familiar if you&#39;ve used something like redis.&lt;/p&gt;
+&lt;p&gt;Unlike redis, WorldQL is designed for games, so it supports unreliable transports like UDP for latency-sensitive applications (Minecraft uses TCP, but this is very uncommon among real-time games).&lt;/p&gt;
+&lt;h2 id=&quot;part-2%3A-synchronizing-blocks-and-the-world&quot;&gt;Part 2: Synchronizing blocks and the world &lt;a class=&quot;direct-link&quot; href=&quot;https://www.worldql.com/posts/2021-08-worldql-scalable-minecraft/#part-2%3A-synchronizing-blocks-and-the-world&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;This uses WorldQL records, a data structure intended for permanent world alterations.&lt;/p&gt;
+&lt;h2 id=&quot;part-3%3A-bragging-about-performance&quot;&gt;Part 3: Bragging about performance &lt;a class=&quot;direct-link&quot; href=&quot;https://www.worldql.com/posts/2021-08-worldql-scalable-minecraft/#part-3%3A-bragging-about-performance&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;h2 id=&quot;coming-soon%3A-program-entire-minecraft-mini-games-inside-worldql-using-javascript&quot;&gt;Coming soon: Program entire Minecraft mini-games inside WorldQL using JavaScript &lt;a class=&quot;direct-link&quot; href=&quot;https://www.worldql.com/posts/2021-08-worldql-scalable-minecraft/#coming-soon%3A-program-entire-minecraft-mini-games-inside-worldql-using-javascript&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Powered by the V8 JavaScript engine, WorldQL&#39;s scripting environment allows you
+to develop Minecraft mini-games without compiling your own server plugin.
+This means you don&#39;t have to restart or reload your server with every code change, allowing you to develop fast.&lt;/p&gt;
+&lt;p&gt;As an added bonus, every Minecraft mini-game you write will be scalable across multiple servers, just like our &amp;quot;vanilla&amp;quot; experience.&lt;/p&gt;
+&lt;p&gt;The experience of developing Minecraft mini-games using WorldQL is very similar to using WorldQL to develop multiplayer for stand-alone titles. If you&#39;re interesting in
+trying it out when it&#39;s ready, be sure to join our Discord to get updates first.&lt;/p&gt;
 </content>
 	</entry>
 </feed>

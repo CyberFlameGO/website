@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How we built an auto-scalable Minecraft server for 1000+ players using WorldQL&#39;s spatial database</title>
+  <meta name="description" content="Raising Minecraft world capacity by spreading players across multiple synchronized server processes">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/css/index.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <link rel="stylesheet" href="/css/prism-base16-monokai.dark.css">
+  <link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="WorldQL">
+  <link rel="alternate" href="/feed/feed.json" type="application/json" title="WorldQL">
+</head>
+<body>
+
+<div class="welcome">
+  <header>
+    <div class="header-contents">
+      <div class="home"><a href="/">WorldQL</a></div>
+      <ul class="nav" style="display: flex; justify-content: center; flex-direction: column">
+        <div>
+            <li class="nav-item"><a
+                href="/">Home</a></li>
+            <li class="nav-item"><a
+                href="/about/">About</a></li>
+            <li class="nav-item"><a
+                href="https://www.zachleat.com/">Community</a></li>
+            <li class="nav-item"><a
+                href="https://www.zachleat.com/">Docs</a></li>
+        </div>
+      </ul>
+    </div>
+  </header>
+
+</div>
+
+<main class="tmpl-post">
+  <h1 style="margin-bottom: 0px">How we built an auto-scalable Minecraft server for 1000+ players using WorldQL&#39;s spatial database</h1>
+<p class="subtitle">Raising Minecraft world capacity by spreading players across multiple synchronized server processes</p>
+<div class="author-and-date">
+  <div style="margin-right: 10px;">
+    Published Sunday, August 29, 2021
+  </div>
+  
+    <div>
+      Written by Jackson Roberts
+    </div>
+  
+</div>
+
+
+<div class="tmpl-post-contents">
+
+  <h2 id="minecraft's-multiplayer-performance-problems">Minecraft's multiplayer performance problems <a class="direct-link" href="#minecraft's-multiplayer-performance-problems">#</a></h2>
+<p>Minecraft's server software is single-threaded, meaning it must process all events in the world sequentially on a single CPU core.
+Even on the most powerful computers a standard Minecraft server will struggle to keep up with over 200 players. Too many players attempting to load too much world will this cause the server <a href="https://minecraft.fandom.com/wiki/Tick#Game_tick">tick rate</a> to plummet to unplayable levels.
+YouTuber SalC1 made a <a href="https://www.youtube.com/watch?v=MBpN679o5Yk">video</a> talking about this issue which has garnered nearly a million views.</p>
+<p>Back at the beginning of the 2020 quarantine I became interested in the idea of a supermassive Minecraft server, one with thousands of players unimpeded by lag.
+This was not possible at the time due to the limitations of Minecraft's server software, so I decided to build a way to share player load across multiple server processes. I named this project &quot;Mammoth&quot;.</p>
+<p>My first attempt involved slicing the world into 1024 block-wide segments which were &quot;owned&quot; by different servers. Areas near the borders were synchronized and ridden entities such as horses or boats would be transferred across servers. <a href="https://youtu.be/Q1RXHS4N6wg?t=60">Here's a video on how it worked</a>.</p>
+<p>It was a neat proof-of-concept, but it had some pretty serious issues.
+Players couldn't see each other across servers or interact. There was a jarring reconnect whenever crossing server borders.
+If one server was knocked offline, certain regions of the world became completely inaccessible. It had no way to mitigate lots of players in one area, meaning large-scale PvP was impossible. The experience simply wasn't great.</p>
+<p>To actually solve the problem, something more robust was needed. I set the following goals:</p>
+<ol>
+<li>Players must be able to see each other, even if on different server processes.</li>
+<li>Players must be able to engage in combat across servers.</li>
+<li>When a player places a block or updates a sign, it should be immediately visible to all other players.</li>
+<li>If one server is down, the entire world should still be accessible.</li>
+<li>If needed, servers can be added or removed at-will to adapt to the amount of players.</li>
+</ol>
+<h2 id="worldql-is-born">WorldQL is born <a class="direct-link" href="#worldql-is-born">#</a></h2>
+<p>While early versions of Mammoth used redis as a backend, I had some new requirements if I needed to meet my goals.</p>
+<ul>
+<li>I needed fast message-passing based on proximity, so I could send the right updates to the right Minecraft servers (and eventually, clients).</li>
+<li></li>
+</ul>
+<h2 id="part-1%3A-synchronizing-player-positions">Part 1: Synchronizing player positions <a class="direct-link" href="#part-1%3A-synchronizing-player-positions">#</a></h2>
+<p>This uses WorldQL subscriptions and messages. These are familiar if you've used something like redis.</p>
+<p>Unlike redis, WorldQL is designed for games, so it supports unreliable transports like UDP for latency-sensitive applications (Minecraft uses TCP, but this is very uncommon among real-time games).</p>
+<h2 id="part-2%3A-synchronizing-blocks-and-the-world">Part 2: Synchronizing blocks and the world <a class="direct-link" href="#part-2%3A-synchronizing-blocks-and-the-world">#</a></h2>
+<p>This uses WorldQL records, a data structure intended for permanent world alterations.</p>
+<h2 id="part-3%3A-bragging-about-performance">Part 3: Bragging about performance <a class="direct-link" href="#part-3%3A-bragging-about-performance">#</a></h2>
+<h2 id="coming-soon%3A-program-entire-minecraft-mini-games-inside-worldql-using-javascript">Coming soon: Program entire Minecraft mini-games inside WorldQL using JavaScript <a class="direct-link" href="#coming-soon%3A-program-entire-minecraft-mini-games-inside-worldql-using-javascript">#</a></h2>
+<p>Powered by the V8 JavaScript engine, WorldQL's scripting environment allows you
+to develop Minecraft mini-games without compiling your own server plugin.
+This means you don't have to restart or reload your server with every code change, allowing you to develop fast.</p>
+<p>As an added bonus, every Minecraft mini-game you write will be scalable across multiple servers, just like our &quot;vanilla&quot; experience.</p>
+<p>The experience of developing Minecraft mini-games using WorldQL is very similar to using WorldQL to develop multiplayer for stand-alone titles. If you're interesting in
+trying it out when it's ready, be sure to join our Discord to get updates first.</p>
+
+
+</div>
+
+<hr>
+<ul>
+</ul>
+
+
+</main>
+
+<footer></footer>
+
+<!-- Current page: /posts/2021-08-worldql-scalable-minecraft/ -->
+</body>
+</html>
