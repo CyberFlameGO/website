@@ -28,25 +28,63 @@ This was not possible at the time due to the limitations of Minecraft&#39;s serv
 Players couldn&#39;t see each other across servers or interact. There was a jarring reconnect whenever crossing server borders.
 If one server was knocked offline, certain regions of the world became completely inaccessible. It had no way to mitigate lots of players in one area, meaning large-scale PvP was impossible. The experience simply wasn&#39;t great.&lt;/p&gt;
 &lt;p&gt;To actually solve the problem, something more robust was needed. I set the following goals:&lt;/p&gt;
-&lt;ol&gt;
+&lt;ul&gt;
 &lt;li&gt;Players must be able to see each other, even if on different server processes.&lt;/li&gt;
 &lt;li&gt;Players must be able to engage in combat across servers.&lt;/li&gt;
 &lt;li&gt;When a player places a block or updates a sign, it should be immediately visible to all other players.&lt;/li&gt;
 &lt;li&gt;If one server is down, the entire world should still be accessible.&lt;/li&gt;
 &lt;li&gt;If needed, servers can be added or removed at-will to adapt to the amount of players.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id=&quot;worldql-is-born&quot;&gt;WorldQL is born &lt;a class=&quot;direct-link&quot; href=&quot;https://www.worldql.com/posts/2021-08-worldql-scalable-minecraft/#worldql-is-born&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;While early versions of Mammoth used redis as a backend, I had some new requirements if I needed to meet my goals.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;I needed fast message-passing based on proximity, so I could send the right updates to the right Minecraft servers (and eventually, clients).&lt;/li&gt;
-&lt;li&gt;&lt;/li&gt;
 &lt;/ul&gt;
+&lt;p&gt;To accomplish this, the world state needed to be stored in a central database and served to Minecraft servers as they popped in and out of existence.
+There also needed to be a message-passing backend that allowed player movement packets to be forwarded between servers for cross-server visibility.&lt;/p&gt;
+&lt;h2 id=&quot;worldql-is-created&quot;&gt;WorldQL is created &lt;a class=&quot;direct-link&quot; href=&quot;https://www.worldql.com/posts/2021-08-worldql-scalable-minecraft/#worldql-is-created&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;While early versions of Mammoth used redis, I had some new requirements that my message passing and data storage backend needed:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Fast messaging based on proximity, so I could send the right updates to the right Minecraft servers (which in turn send them to player clients)&lt;/li&gt;
+&lt;li&gt;An efficient way to store and retrieve permanent world changes&lt;/li&gt;
+&lt;li&gt;Real-time object tracking&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I couldn&#39;t find any existing product with these qualities. I found incomplete attempts to use SpatialOS for Minecraft scaling, and I considered using it for this project. However, their license turned me off.&lt;/p&gt;
+&lt;p&gt;To meet these requirements, I started work on WorldQL. It&#39;s a real-time, scriptable spatial database built for multiplayer games.
+WorldQL can replace traditional game servers or be used to load balance existing ones.&lt;/p&gt;
+&lt;p&gt;If you&#39;re a game developer or this just sounds interesting to you, please be sure to join our Discord server.&lt;/p&gt;
+&lt;p&gt;The new version of Mammoth uses WorldQL to store all permanent world changes and pass real-time player information (such as location) between servers.
+Minecraft game servers communicate with WorldQL using &lt;a href=&quot;https://zeromq.org/&quot;&gt;ZeroMQ&lt;/a&gt; TCP push/pull sockets.&lt;/p&gt;
+&lt;h2 id=&quot;mammoth&#39;s-architecture&quot;&gt;Mammoth&#39;s architecture &lt;a class=&quot;direct-link&quot; href=&quot;https://www.worldql.com/posts/2021-08-worldql-scalable-minecraft/#mammoth&#39;s-architecture&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Mammoth has three parts:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Two or more Minecraft server hosts running Spigot-based server software&lt;/li&gt;
+&lt;li&gt;WorldQL server&lt;/li&gt;
+&lt;li&gt;BungeeCord proxy server (optional)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&quot;https://www.worldql.com/img/mammoth-arch.png&quot; alt=&quot;WorldQL architecture diagram&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;With this setup, a player can connect to &lt;strong&gt;any&lt;/strong&gt; of the Minecraft servers and receive the same world and player data. Optionally, a server admin can choose to put the Minecraft servers behind a proxy, so they all share a single external IP/port.&lt;/p&gt;
 &lt;h2 id=&quot;part-1%3A-synchronizing-player-positions&quot;&gt;Part 1: Synchronizing player positions &lt;a class=&quot;direct-link&quot; href=&quot;https://www.worldql.com/posts/2021-08-worldql-scalable-minecraft/#part-1%3A-synchronizing-player-positions&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;This uses WorldQL subscriptions and messages. These are familiar if you&#39;ve used something like redis.&lt;/p&gt;
-&lt;p&gt;Unlike redis, WorldQL is designed for games, so it supports unreliable transports like UDP for latency-sensitive applications (Minecraft uses TCP, but this is very uncommon among real-time games).&lt;/p&gt;
+&lt;p&gt;To broadcast player movement between servers, Mammoth uses WorldQL&#39;s location-based pub/sub messaging. Minecraft server follows a simple two-step process:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Minecraft servers continuously report their players&#39; locations to the WorldQL server.&lt;/li&gt;
+&lt;li&gt;Servers receive update messages about players in locations they have loaded.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Here&#39;s a video demo showing two players viewing and punching each other, despite being on different servers!&lt;/p&gt;
+&lt;video controls=&quot;&quot;&gt;
+    &lt;source src=&quot;https://www.worldql.com/img/minecraft-cross-server-pvp.mp4&quot; type=&quot;video/mp4&quot; /&gt;
+&lt;/video&gt;
+&lt;p&gt;The two Minecraft servers exchange real-time movement and combat events through WorldQL.
+For example, when &lt;em&gt;Left Player&lt;/em&gt; moves in front of &lt;em&gt;Right Player&lt;/em&gt;:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;em&gt;Left Player&lt;/em&gt;&#39;s Minecraft server sends an event containing their new location to WorldQL.&lt;/li&gt;
+&lt;li&gt;Because &lt;em&gt;Left Player&lt;/em&gt; is near &lt;em&gt;Right Player&lt;/em&gt;, WorldQL sends a message to Right Player&#39;s server.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Right Player&lt;/em&gt;&#39;s server receives the message and generates client-bound packets to make &lt;em&gt;Left Player&lt;/em&gt; appear.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;You can run this demo on your own machine!&lt;/p&gt;
 &lt;h2 id=&quot;part-2%3A-synchronizing-blocks-and-the-world&quot;&gt;Part 2: Synchronizing blocks and the world &lt;a class=&quot;direct-link&quot; href=&quot;https://www.worldql.com/posts/2021-08-worldql-scalable-minecraft/#part-2%3A-synchronizing-blocks-and-the-world&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;This uses WorldQL records, a data structure intended for permanent world alterations.&lt;/p&gt;
-&lt;h2 id=&quot;part-3%3A-bragging-about-performance&quot;&gt;Part 3: Bragging about performance &lt;a class=&quot;direct-link&quot; href=&quot;https://www.worldql.com/posts/2021-08-worldql-scalable-minecraft/#part-3%3A-bragging-about-performance&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;This uses WorldQL Records, a data structure intended for permanent world alterations. In Mammoth, no single Minecraft server is responsible for storing
+even part of the world. All block changes from the base seed are centrally stored in WorldQL. These changes are indexed by chunk coordinate and time, so a Minecraft server can request only the updates it needs since it last synced a chunk.&lt;/p&gt;
+&lt;p&gt;When a server is newly created, it &amp;quot;catches up&amp;quot; with the current version of the world. Normally this happens automatically, but in this video I trigger it using a command so I can show you:&lt;/p&gt;
+&lt;p&gt;Here&#39;s a video demonstrating real-time block data synchronization between two servers:&lt;/p&gt;
+&lt;h2 id=&quot;performance-gains&quot;&gt;Performance gains &lt;a class=&quot;direct-link&quot; href=&quot;https://www.worldql.com/posts/2021-08-worldql-scalable-minecraft/#performance-gains&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;While still a work in progress, Mammoth offers considerable performance benefits over standard Minecraft servers. It&#39;s particularly good for handling very high player counts.&lt;/p&gt;
+&lt;p&gt;Here&#39;s a demonstration showcasing 2000 cross-server players, this simulation is functionally identical to real player load. The server TPS never dips below 20 (perfect) and I&#39;m running the whole thing on my laptop.&lt;/p&gt;
 &lt;h2 id=&quot;coming-soon%3A-program-entire-minecraft-mini-games-inside-worldql-using-javascript&quot;&gt;Coming soon: Program entire Minecraft mini-games inside WorldQL using JavaScript &lt;a class=&quot;direct-link&quot; href=&quot;https://www.worldql.com/posts/2021-08-worldql-scalable-minecraft/#coming-soon%3A-program-entire-minecraft-mini-games-inside-worldql-using-javascript&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;Powered by the V8 JavaScript engine, WorldQL&#39;s scripting environment allows you
 to develop Minecraft mini-games without compiling your own server plugin.

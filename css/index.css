@@ -17,7 +17,7 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: sans-serif;
+  font-family: "Atkinson Hyperlegible", sans-serif;
   color: var(--darkgray);
   background-color: var(--white);
 }
@@ -40,6 +40,11 @@ p:last-child {
 
 .captionedimg img {
   border: 1px solid rgb(200, 200, 200);
+  max-width: 100%;
+  display: block;
+}
+
+.tmpl-post img {
   max-width: 100%;
 }
 
@@ -315,8 +320,9 @@ a[href].direct-link:focus:visited,
 }
 
 video {
-  width: 100%;
-  border: 1px dashed var(--lightgray);
+  margin: 0 auto 0 auto;
+  display: block;
+  max-width: 100%;
 }
 
 .button {

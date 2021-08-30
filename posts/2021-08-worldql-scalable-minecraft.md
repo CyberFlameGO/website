@@ -26,28 +26,80 @@ Players couldn't see each other across servers or interact. There was a jarring 
 If one server was knocked offline, certain regions of the world became completely inaccessible. It had no way to mitigate lots of players in one area, meaning large-scale PvP was impossible. The experience simply wasn't great.
 
 To actually solve the problem, something more robust was needed. I set the following goals:
-1. Players must be able to see each other, even if on different server processes.
-2. Players must be able to engage in combat across servers.
-3. When a player places a block or updates a sign, it should be immediately visible to all other players.
-4. If one server is down, the entire world should still be accessible.
-5. If needed, servers can be added or removed at-will to adapt to the amount of players.
+- Players must be able to see each other, even if on different server processes.
+- Players must be able to engage in combat across servers.
+- When a player places a block or updates a sign, it should be immediately visible to all other players.
+- If one server is down, the entire world should still be accessible.
+- If needed, servers can be added or removed at-will to adapt to the amount of players.
 
-## WorldQL is born
-While early versions of Mammoth used redis as a backend, I had some new requirements if I needed to meet my goals.
-- I needed fast message-passing based on proximity, so I could send the right updates to the right Minecraft servers (and eventually, clients).
--
+To accomplish this, the world state needed to be stored in a central database and served to Minecraft servers as they popped in and out of existence.
+There also needed to be a message-passing backend that allowed player movement packets to be forwarded between servers for cross-server visibility.
+
+## WorldQL is created
+While early versions of Mammoth used redis, I had some new requirements that my message passing and data storage backend needed:
+- Fast messaging based on proximity, so I could send the right updates to the right Minecraft servers (which in turn send them to player clients)
+- An efficient way to store and retrieve permanent world changes
+- Real-time object tracking
+
+I couldn't find any existing product with these qualities. I found incomplete attempts to use SpatialOS for Minecraft scaling, and I considered using it for this project. However, their license turned me off.
+
+To meet these requirements, I started work on WorldQL. It's a real-time, scriptable spatial database built for multiplayer games.
+WorldQL can replace traditional game servers or be used to load balance existing ones.
+
+If you're a game developer or this just sounds interesting to you, please be sure to join our Discord server.
+
+The new version of Mammoth uses WorldQL to store all permanent world changes and pass real-time player information (such as location) between servers.
+Minecraft game servers communicate with WorldQL using [ZeroMQ](https://zeromq.org/) TCP push/pull sockets.
+
+## Mammoth's architecture
+Mammoth has three parts:
+1. Two or more Minecraft server hosts running Spigot-based server software
+2. WorldQL server
+3. BungeeCord proxy server (optional)
+
+![WorldQL architecture diagram](/img/mammoth-arch.png)
+
+With this setup, a player can connect to **any** of the Minecraft servers and receive the same world and player data. Optionally, a server admin can choose to put the Minecraft servers behind a proxy, so they all share a single external IP/port.
 
 ## Part 1: Synchronizing player positions
 
-This uses WorldQL subscriptions and messages. These are familiar if you've used something like redis.
+To broadcast player movement between servers, Mammoth uses WorldQL's location-based pub/sub messaging. Minecraft server follows a simple two-step process:
+1. Minecraft servers continuously report their players' locations to the WorldQL server.
+2. Servers receive update messages about players in locations they have loaded.
 
-Unlike redis, WorldQL is designed for games, so it supports unreliable transports like UDP for latency-sensitive applications (Minecraft uses TCP, but this is very uncommon among real-time games).
+Here's a video demo showing two players viewing and punching each other, despite being on different servers!
+
+<video controls>
+    <source src="/img/minecraft-cross-server-pvp.mp4" type="video/mp4">
+</video>
+
+The two Minecraft servers exchange real-time movement and combat events through WorldQL.
+For example, when *Left Player* moves in front of *Right Player*:
+1. _Left Player_'s Minecraft server sends an event containing their new location to WorldQL.
+2. Because _Left Player_ is near _Right Player_, WorldQL sends a message to Right Player's server.
+3. _Right Player_'s server receives the message and generates client-bound packets to make _Left Player_ appear.
+
+You can run this demo on your own machine!
 
 ## Part 2: Synchronizing blocks and the world
 
-This uses WorldQL records, a data structure intended for permanent world alterations.
+This uses WorldQL Records, a data structure intended for permanent world alterations. In Mammoth, no single Minecraft server is responsible for storing
+even part of the world. All block changes from the base seed are centrally stored in WorldQL. These changes are indexed by chunk coordinate and time, so a Minecraft server can request only the updates it needs since it last synced a chunk.
 
-## Part 3: Bragging about performance
+When a server is newly created, it "catches up" with the current version of the world. Normally this happens automatically, but in this video I trigger it using a command so I can show you:
+
+
+
+Here's a video demonstrating real-time block data synchronization between two servers:
+
+
+## Performance gains
+
+While still a work in progress, Mammoth offers considerable performance benefits over standard Minecraft servers. It's particularly good for handling very high player counts.
+
+Here's a demonstration showcasing 2000 cross-server players, this simulation is functionally identical to real player load. The server TPS never dips below 20 (perfect) and I'm running the whole thing on my laptop.
+
+
 
 ## Coming soon: Program entire Minecraft mini-games inside WorldQL using JavaScript
 Powered by the V8 JavaScript engine, WorldQL's scripting environment allows you
