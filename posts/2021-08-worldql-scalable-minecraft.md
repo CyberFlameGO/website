@@ -83,8 +83,8 @@ You can run this demo on your own machine!
 
 ## Part 2: Synchronizing blocks and the world
 
-This uses WorldQL Records, a data structure intended for permanent world alterations. In Mammoth, no single Minecraft server is responsible for storing
-even part of the world. All block changes from the base seed are centrally stored in WorldQL. These changes are indexed by chunk coordinate and time, so a Minecraft server can request only the updates it needs since it last synced a chunk.
+Mammoth tracks the authoritative version of the Minecraft world using WorldQL Records, a data structure designed for permanent world alterations.
+In Mammoth, no single Minecraft server is responsible for storing the world. All block changes from the base seed are centrally stored in WorldQL. These changes are indexed by chunk coordinate and time, so a Minecraft server can request only the updates it needs since it last synced a chunk.
 
 Here's a video demonstrating real-time block synchronization between two servers. Complexities such as sign edits, compound blocks (like beds and doors) and nether portal creation all work properly.
 
@@ -92,11 +92,14 @@ Here's a video demonstrating real-time block synchronization between two servers
     <source src="/img/minecraft-cross-server-blocks.mp4" type="video/mp4">
 </video>
 
-When a server is newly created, it "catches up" with the current version of the world. Normally this happens automatically, but in the video below I trigger it using a command so I can show you.
+When a new Minecraft server is created, it "catches up" with the current version of the world. Prior to recording the video below, **I completely deleted this my Minecraft server's world files**. It was still able to quickly sync the world from WorldQL. Normally this happens automatically, but I triggered it using Mammoth's /refreshworld command so I can show you.
 
 
 Mammoth's world synchronization is incomplete for the latest 1.17.1 update. We're planning to introduce redstone, hostile mob, and weapon support ASAP.
 
+<video controls>
+  <source src="/img/minecraft-world-sync-catchup.mp4" type="video/mp4">
+</video>
 
 ## Performance gains
 
