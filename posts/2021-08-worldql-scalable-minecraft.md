@@ -92,7 +92,7 @@ Here's a video demonstrating real-time block synchronization between two servers
     <source src="/img/minecraft-cross-server-blocks.mp4" type="video/mp4">
 </video>
 
-When a new Minecraft server is created, it "catches up" with the current version of the world. Prior to recording the video below, **I completely deleted this my Minecraft server's world files**. It was still able to quickly sync the world from WorldQL. Normally this happens automatically, but I triggered it using Mammoth's /refreshworld command so I can show you.
+When a new Minecraft server is created, it "catches up" with the current version of the world. Prior to recording the video below, I build a cute desert home then **completely deleted this my Minecraft server's world files**. It was still able to quickly sync the world from WorldQL. Normally this happens automatically, but I triggered it using Mammoth's /refreshworld command so I can show you.
 
 <video controls>
   <source src="/img/minecraft-world-sync-catchup.mp4" type="video/mp4">
