@@ -9,6 +9,7 @@ layout: layouts/post.njk
 author: Jackson Roberts
 ---
 
+DRAFT COPY. PLZ DO NOT SHARE
 
 ## Minecraft's multiplayer performance problems
 Minecraft's server software is single-threaded, meaning it must process all events in the world sequentially on a single CPU core.

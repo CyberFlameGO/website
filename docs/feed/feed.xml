@@ -17,7 +17,8 @@
 		<link href="https://www.worldql.com/posts/2021-08-worldql-scalable-minecraft/"/>
 		<updated>2021-08-29T00:00:00Z</updated>
 		<id>https://www.worldql.com/posts/2021-08-worldql-scalable-minecraft/</id>
-		<content type="html">&lt;h2 id=&quot;minecraft&#39;s-multiplayer-performance-problems&quot;&gt;Minecraft&#39;s multiplayer performance problems &lt;a class=&quot;direct-link&quot; href=&quot;https://www.worldql.com/posts/2021-08-worldql-scalable-minecraft/#minecraft&#39;s-multiplayer-performance-problems&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
+		<content type="html">&lt;p&gt;DRAFT COPY. PLZ DO NOT SHARE&lt;/p&gt;
+&lt;h2 id=&quot;minecraft&#39;s-multiplayer-performance-problems&quot;&gt;Minecraft&#39;s multiplayer performance problems &lt;a class=&quot;direct-link&quot; href=&quot;https://www.worldql.com/posts/2021-08-worldql-scalable-minecraft/#minecraft&#39;s-multiplayer-performance-problems&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;Minecraft&#39;s server software is single-threaded, meaning it must process all events in the world sequentially on a single CPU core.
 Even on the most powerful computers a standard Minecraft server will struggle to keep up with over 200 players. Too many players attempting to load too much world will this cause the server &lt;a href=&quot;https://minecraft.fandom.com/wiki/Tick#Game_tick&quot;&gt;tick rate&lt;/a&gt; to plummet to unplayable levels.
 YouTuber SalC1 made a &lt;a href=&quot;https://www.youtube.com/watch?v=MBpN679o5Yk&quot;&gt;video&lt;/a&gt; talking about this issue which has garnered nearly a million views.&lt;/p&gt;
