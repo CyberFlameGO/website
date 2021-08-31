@@ -94,12 +94,11 @@ Here's a video demonstrating real-time block synchronization between two servers
 
 When a new Minecraft server is created, it "catches up" with the current version of the world. Prior to recording the video below, **I completely deleted this my Minecraft server's world files**. It was still able to quickly sync the world from WorldQL. Normally this happens automatically, but I triggered it using Mammoth's /refreshworld command so I can show you.
 
-
-Mammoth's world synchronization is incomplete for the latest 1.17.1 update. We're planning to introduce redstone, hostile mob, and weapon support ASAP.
-
 <video controls>
   <source src="/img/minecraft-world-sync-catchup.mp4" type="video/mp4">
 </video>
+
+Mammoth's world synchronization is incomplete for the latest 1.17.1 update. We're planning to introduce redstone, hostile mob, and weapon support ASAP.
 
 ## Performance gains
 
