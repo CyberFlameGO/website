@@ -86,11 +86,16 @@ You can run this demo on your own machine!
 This uses WorldQL Records, a data structure intended for permanent world alterations. In Mammoth, no single Minecraft server is responsible for storing
 even part of the world. All block changes from the base seed are centrally stored in WorldQL. These changes are indexed by chunk coordinate and time, so a Minecraft server can request only the updates it needs since it last synced a chunk.
 
-When a server is newly created, it "catches up" with the current version of the world. Normally this happens automatically, but in this video I trigger it using a command so I can show you:
+Here's a video demonstrating real-time block synchronization between two servers. Complexities such as sign edits, compound blocks (like beds and doors) and nether portal creation all work properly.
+
+<video controls>
+    <source src="/img/minecraft-cross-server-blocks.mp4" type="video/mp4">
+</video>
+
+When a server is newly created, it "catches up" with the current version of the world. Normally this happens automatically, but in the video below I trigger it using a command so I can show you.
 
 
-
-Here's a video demonstrating real-time block data synchronization between two servers:
+Mammoth's world synchronization is incomplete for the latest 1.17.1 update. We're planning to introduce redstone, hostile mob, and weapon support ASAP.
 
 
 ## Performance gains
@@ -110,4 +115,12 @@ As an added bonus, every Minecraft mini-game you write will be scalable across m
 
 The experience of developing Minecraft mini-games using WorldQL is very similar to using WorldQL to develop multiplayer for stand-alone titles. If you're interesting in
 trying it out when it's ready, be sure to join our Discord to get updates first.
+
+## Conclusions
+
+Thanks for reading this article! Feel free to check out our GitHub repository for the Mammoth Minecraft server and join WorldQL's Discord!
+
+
+<h2 id="comments">Comments</h2>
+Reddit links will go here
 

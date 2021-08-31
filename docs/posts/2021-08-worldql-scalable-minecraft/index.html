@@ -121,8 +121,12 @@ For example, when <em>Left Player</em> moves in front of <em>Right Player</em>:<
 <h2 id="part-2%3A-synchronizing-blocks-and-the-world">Part 2: Synchronizing blocks and the world <a class="direct-link" href="#part-2%3A-synchronizing-blocks-and-the-world">#</a></h2>
 <p>This uses WorldQL Records, a data structure intended for permanent world alterations. In Mammoth, no single Minecraft server is responsible for storing
 even part of the world. All block changes from the base seed are centrally stored in WorldQL. These changes are indexed by chunk coordinate and time, so a Minecraft server can request only the updates it needs since it last synced a chunk.</p>
-<p>When a server is newly created, it &quot;catches up&quot; with the current version of the world. Normally this happens automatically, but in this video I trigger it using a command so I can show you:</p>
-<p>Here's a video demonstrating real-time block data synchronization between two servers:</p>
+<p>Here's a video demonstrating real-time block synchronization between two servers. Complexities such as sign edits, compound blocks (like beds and doors) and nether portal creation all work properly.</p>
+<video controls>
+    <source src="/img/minecraft-cross-server-blocks.mp4" type="video/mp4">
+</video>
+<p>When a server is newly created, it &quot;catches up&quot; with the current version of the world. Normally this happens automatically, but in the video below I trigger it using a command so I can show you.</p>
+<p>Mammoth's world synchronization is incomplete for the latest 1.17.1 update. We're planning to introduce redstone, hostile mob, and weapon support ASAP.</p>
 <h2 id="performance-gains">Performance gains <a class="direct-link" href="#performance-gains">#</a></h2>
 <p>While still a work in progress, Mammoth offers considerable performance benefits over standard Minecraft servers. It's particularly good for handling very high player counts.</p>
 <p>Here's a demonstration showcasing 2000 cross-server players, this simulation is functionally identical to real player load. The server TPS never dips below 20 (perfect) and I'm running the whole thing on my laptop.</p>
@@ -133,6 +137,10 @@ This means you don't have to restart or reload your server with every code chang
 <p>As an added bonus, every Minecraft mini-game you write will be scalable across multiple servers, just like our &quot;vanilla&quot; experience.</p>
 <p>The experience of developing Minecraft mini-games using WorldQL is very similar to using WorldQL to develop multiplayer for stand-alone titles. If you're interesting in
 trying it out when it's ready, be sure to join our Discord to get updates first.</p>
+<h2 id="conclusions">Conclusions <a class="direct-link" href="#conclusions">#</a></h2>
+<p>Thanks for reading this article! Feel free to check out our GitHub repository for the Mammoth Minecraft server and join WorldQL's Discord!</p>
+<h2 id="comments">Comments</h2>
+Reddit links will go here
 
 
 </div>

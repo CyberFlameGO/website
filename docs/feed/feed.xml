@@ -80,8 +80,12 @@ For example, when &lt;em&gt;Left Player&lt;/em&gt; moves in front of &lt;em&gt;R
 &lt;h2 id=&quot;part-2%3A-synchronizing-blocks-and-the-world&quot;&gt;Part 2: Synchronizing blocks and the world &lt;a class=&quot;direct-link&quot; href=&quot;https://www.worldql.com/posts/2021-08-worldql-scalable-minecraft/#part-2%3A-synchronizing-blocks-and-the-world&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;This uses WorldQL Records, a data structure intended for permanent world alterations. In Mammoth, no single Minecraft server is responsible for storing
 even part of the world. All block changes from the base seed are centrally stored in WorldQL. These changes are indexed by chunk coordinate and time, so a Minecraft server can request only the updates it needs since it last synced a chunk.&lt;/p&gt;
-&lt;p&gt;When a server is newly created, it &amp;quot;catches up&amp;quot; with the current version of the world. Normally this happens automatically, but in this video I trigger it using a command so I can show you:&lt;/p&gt;
-&lt;p&gt;Here&#39;s a video demonstrating real-time block data synchronization between two servers:&lt;/p&gt;
+&lt;p&gt;Here&#39;s a video demonstrating real-time block synchronization between two servers. Complexities such as sign edits, compound blocks (like beds and doors) and nether portal creation all work properly.&lt;/p&gt;
+&lt;video controls=&quot;&quot;&gt;
+    &lt;source src=&quot;https://www.worldql.com/img/minecraft-cross-server-blocks.mp4&quot; type=&quot;video/mp4&quot; /&gt;
+&lt;/video&gt;
+&lt;p&gt;When a server is newly created, it &amp;quot;catches up&amp;quot; with the current version of the world. Normally this happens automatically, but in the video below I trigger it using a command so I can show you.&lt;/p&gt;
+&lt;p&gt;Mammoth&#39;s world synchronization is incomplete for the latest 1.17.1 update. We&#39;re planning to introduce redstone, hostile mob, and weapon support ASAP.&lt;/p&gt;
 &lt;h2 id=&quot;performance-gains&quot;&gt;Performance gains &lt;a class=&quot;direct-link&quot; href=&quot;https://www.worldql.com/posts/2021-08-worldql-scalable-minecraft/#performance-gains&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;While still a work in progress, Mammoth offers considerable performance benefits over standard Minecraft servers. It&#39;s particularly good for handling very high player counts.&lt;/p&gt;
 &lt;p&gt;Here&#39;s a demonstration showcasing 2000 cross-server players, this simulation is functionally identical to real player load. The server TPS never dips below 20 (perfect) and I&#39;m running the whole thing on my laptop.&lt;/p&gt;
@@ -92,6 +96,10 @@ This means you don&#39;t have to restart or reload your server with every code c
 &lt;p&gt;As an added bonus, every Minecraft mini-game you write will be scalable across multiple servers, just like our &amp;quot;vanilla&amp;quot; experience.&lt;/p&gt;
 &lt;p&gt;The experience of developing Minecraft mini-games using WorldQL is very similar to using WorldQL to develop multiplayer for stand-alone titles. If you&#39;re interesting in
 trying it out when it&#39;s ready, be sure to join our Discord to get updates first.&lt;/p&gt;
+&lt;h2 id=&quot;conclusions&quot;&gt;Conclusions &lt;a class=&quot;direct-link&quot; href=&quot;https://www.worldql.com/posts/2021-08-worldql-scalable-minecraft/#conclusions&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Thanks for reading this article! Feel free to check out our GitHub repository for the Mammoth Minecraft server and join WorldQL&#39;s Discord!&lt;/p&gt;
+&lt;h2 id=&quot;comments&quot;&gt;Comments&lt;/h2&gt;
+Reddit links will go here
 </content>
 	</entry>
 </feed>
