@@ -95,6 +95,8 @@ When a new Minecraft server is created, it "catches up" with the current version
   <source src="/img/minecraft-world-sync-catchup.mp4" type="video/mp4">
 </video>
 
+This means a Minecraft server can *dynamically auto-scale*; server instances can be created and destroyed to match demand.
+
 Mammoth's world synchronization is incomplete for the latest 1.17.1 update. We're planning to introduce redstone, hostile mob, and weapon support ASAP.
 
 ## Performance gains
