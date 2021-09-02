@@ -20,7 +20,7 @@ Back at the beginning of the 2020 quarantine I became interested in the idea of 
 This was not possible at the time due to the limitations of Minecraft's server software, so I decided to build a way to share player load across multiple server processes. I named this project "Mammoth".
 
 
-My first attempt involved slicing the world into 1024 block-wide segments which were "owned" by different servers. Areas near the borders were synchronized and ridden entities such as horses or boats would be transferred across servers. [Here's a video on how it worked](https://youtu.be/Q1RXHS4N6wg?t=60).
+My first attempt involved slicing the world into 1024 block-wide segments which were "owned" by different servers. Areas near the borders were synchronized and ridden entities such as horses or boats would be transferred across servers. [Here's a video on how it worked](https://youtu.be/Q1RXHS4N6wg?t=60). This technique is no longer used; the Minecraft world is no longer sliced up by area.
 
 It was a neat proof-of-concept, but it had some pretty serious issues.
 Players couldn't see each other across servers or interact. There was a jarring reconnect whenever crossing server borders.
@@ -106,8 +106,6 @@ Mammoth's world synchronization is incomplete for the latest 1.17.1 update. We'r
 While still a work in progress, Mammoth offers considerable performance benefits over standard Minecraft servers. It's particularly good for handling very high player counts.
 
 Here's a demonstration showcasing 2000 cross-server players, this simulation is functionally identical to real player load. The server TPS never dips below 20 (perfect) and I'm running the whole thing on my laptop.
-
-
 
 ## Coming soon: Program entire Minecraft mini-games inside WorldQL using JavaScript
 Powered by the V8 JavaScript engine, WorldQL's scripting environment allows you

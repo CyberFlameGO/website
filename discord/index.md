@@ -1,7 +1,7 @@
 ---
 eleventyNavigation:
   key: Community
-  url: https://www.zachleat.com/
+  url: https://discord.gg/tDZkXQPzEw
   permalink: false
   order: 3
 ---

@@ -31,9 +31,9 @@
             <li class="nav-item"><a
                 href="/about/">About</a></li>
             <li class="nav-item"><a
-                href="https://www.zachleat.com/">Community</a></li>
+                href="https://discord.gg/tDZkXQPzEw">Community</a></li>
             <li class="nav-item"><a
-                href="https://www.zachleat.com/">Docs</a></li>
+                href="https://docs.worldql.com/">Docs</a></li>
         </div>
       </ul>
     </div>
@@ -65,7 +65,7 @@ Even on the most powerful computers a standard Minecraft server will struggle to
 YouTuber SalC1 made a <a href="https://www.youtube.com/watch?v=MBpN679o5Yk">video</a> talking about this issue which has garnered nearly a million views.</p>
 <p>Back at the beginning of the 2020 quarantine I became interested in the idea of a supermassive Minecraft server, one with thousands of players unimpeded by lag.
 This was not possible at the time due to the limitations of Minecraft's server software, so I decided to build a way to share player load across multiple server processes. I named this project &quot;Mammoth&quot;.</p>
-<p>My first attempt involved slicing the world into 1024 block-wide segments which were &quot;owned&quot; by different servers. Areas near the borders were synchronized and ridden entities such as horses or boats would be transferred across servers. <a href="https://youtu.be/Q1RXHS4N6wg?t=60">Here's a video on how it worked</a>.</p>
+<p>My first attempt involved slicing the world into 1024 block-wide segments which were &quot;owned&quot; by different servers. Areas near the borders were synchronized and ridden entities such as horses or boats would be transferred across servers. <a href="https://youtu.be/Q1RXHS4N6wg?t=60">Here's a video on how it worked</a>. This technique is no longer used; the Minecraft world is no longer sliced up by area.</p>
 <p>It was a neat proof-of-concept, but it had some pretty serious issues.
 Players couldn't see each other across servers or interact. There was a jarring reconnect whenever crossing server borders.
 If one server was knocked offline, certain regions of the world became completely inaccessible. It had no way to mitigate lots of players in one area, meaning large-scale PvP was impossible. The experience simply wasn't great.</p>

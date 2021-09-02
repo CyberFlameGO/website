@@ -1,7 +1,7 @@
 ---
 eleventyNavigation:
   key: Docs
-  url: https://www.zachleat.com/
+  url: https://docs.worldql.com/
   permalink: false
   order: 4
 ---

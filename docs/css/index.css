@@ -416,9 +416,14 @@ h1, h2, h3, h4, h5, h6 {
   position: relative;
   width: 50%;
 }
+
 @media only screen and (max-width: 550px) {
   .page-section-half {
     min-width: 100%;
+  }
+
+  .hero-left {
+    text-align: center;
   }
 }
 
@@ -484,6 +489,7 @@ h1, h2, h3, h4, h5, h6 {
 .logolist {
 
 }
+
 .logolist svg {
   width: 36px;
 }
