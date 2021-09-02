@@ -1,7 +1,7 @@
 ---
 title: "How we built an auto-scalable Minecraft server for 1000+ players using WorldQL's spatial database"
 description: Raising Minecraft world capacity by spreading players across multiple synchronized server processes
-date: 2021-08-29
+date: 2021-09-02
 tags:
     - minecraft
     - case study
@@ -9,11 +9,9 @@ layout: layouts/post.njk
 author: Jackson Roberts
 ---
 
-DRAFT COPY. PLZ DO NOT SHARE
-
 ## Minecraft's multiplayer performance problems
 Minecraft's server software is single-threaded, meaning it must process all events in the world sequentially on a single CPU core.
-Even on the most powerful computers a standard Minecraft server will struggle to keep up with over 200 players. Too many players attempting to load too much world will this cause the server [tick rate](https://minecraft.fandom.com/wiki/Tick#Game_tick) to plummet to unplayable levels.
+Even on the most powerful computers, a standard Minecraft server will struggle to keep up with over 200 players. Too many players attempting to load too much of the world will cause the server [tick rate](https://minecraft.fandom.com/wiki/Tick#Game_tick) to plummet to unplayable levels.
 YouTuber SalC1 made a [video](https://www.youtube.com/watch?v=MBpN679o5Yk) talking about this issue which has garnered nearly a million views.
 
 Back at the beginning of the 2020 quarantine I became interested in the idea of a supermassive Minecraft server, one with thousands of players unimpeded by lag.
@@ -47,7 +45,7 @@ I couldn't find any existing product with these qualities. I found incomplete at
 To meet these requirements, I started work on WorldQL. It's a real-time, scriptable spatial database built for multiplayer games.
 WorldQL can replace traditional game servers or be used to load balance existing ones.
 
-If you're a game developer or this just sounds interesting to you, please be sure to join our Discord server.
+If you're a game developer or this just sounds interesting to you, please be sure to join [our Discord server](https://discord.gg/tDZkXQPzEw).
 
 The new version of Mammoth uses WorldQL to store all permanent world changes and pass real-time player information (such as location) between servers.
 Minecraft game servers communicate with WorldQL using [ZeroMQ](https://zeromq.org/) TCP push/pull sockets.
@@ -64,7 +62,7 @@ With this setup, a player can connect to **any** of the Minecraft servers and re
 
 ## Part 1: Synchronizing player positions
 
-To broadcast player movement between servers, Mammoth uses WorldQL's location-based pub/sub messaging. Minecraft server follows a simple two-step process:
+To broadcast player movement between servers, Mammoth uses WorldQL's location-based pub/sub messaging. This is a simple two-step process:
 1. Minecraft servers continuously report their players' locations to the WorldQL server.
 2. Servers receive update messages about players in locations they have loaded.
 
@@ -80,8 +78,6 @@ For example, when *Left Player* moves in front of *Right Player*:
 2. Because _Left Player_ is near _Right Player_, WorldQL sends a message to Right Player's server.
 3. _Right Player_'s server receives the message and generates client-bound packets to make _Left Player_ appear.
 
-You can run this demo on your own machine!
-
 ## Part 2: Synchronizing blocks and the world
 
 Mammoth tracks the authoritative version of the Minecraft world using WorldQL Records, a data structure designed for permanent world alterations.
@@ -93,7 +89,7 @@ Here's a video demonstrating real-time block synchronization between two servers
     <source src="/img/minecraft-cross-server-blocks.mp4" type="video/mp4">
 </video>
 
-When a new Minecraft server is created, it "catches up" with the current version of the world. Prior to recording the video below, I build a cute desert home then **completely deleted this my Minecraft server's world files**. It was still able to quickly sync the world from WorldQL. Normally this happens automatically, but I triggered it using Mammoth's /refreshworld command so I can show you.
+When a new Minecraft server is created, it "catches up" with the current version of the world. Prior to recording the video below, I built a cute desert home then **completely deleted my Minecraft server's world files**. It was able to quickly sync the world from WorldQL. Normally this happens automatically, but I triggered it using Mammoth's /refreshworld command so I can show you.
 
 <video controls>
   <source src="/img/minecraft-world-sync-catchup.mp4" type="video/mp4">
@@ -105,7 +101,19 @@ Mammoth's world synchronization is incomplete for the latest 1.17.1 update. We'r
 
 While still a work in progress, Mammoth offers considerable performance benefits over standard Minecraft servers. It's particularly good for handling very high player counts.
 
-Here's a demonstration showcasing 2000 cross-server players, this simulation is functionally identical to real player load. The server TPS never dips below 20 (perfect) and I'm running the whole thing on my laptop.
+Here's a demonstration showcasing 1000 cross-server players, this simulation is functionally identical to real player load. The server TPS never dips below 20 (perfect) and I'm running the whole thing on my laptop.
+
+These simulated players are created by a loopback process which:
+1. Receives WorldQL player movement queries.
+2. Modifies their location and name 1000 times and sends them back to the server.
+
+This stress test results in the player seeing a wall of copycats:
+
+<video controls>
+  <source src="/img/mammoth-stress-test.mp4" type="video/mp4">
+</video>
+
+Mammoth pushes Minecraft server performance further than ever and will enable entirely new massively-multiplayer experiences. Keep in mind this demo was ran and recorded on a Macbook and performs even better on a real server.
 
 ## Coming soon: Program entire Minecraft mini-games inside WorldQL using JavaScript
 Powered by the V8 JavaScript engine, WorldQL's scripting environment allows you
@@ -114,12 +122,12 @@ This means you don't have to restart or reload your server with every code chang
 
 As an added bonus, every Minecraft mini-game you write will be scalable across multiple servers, just like our "vanilla" experience.
 
-The experience of developing Minecraft mini-games using WorldQL is very similar to using WorldQL to develop multiplayer for stand-alone titles. If you're interesting in
-trying it out when it's ready, be sure to join our Discord to get updates first.
+The process of developing Minecraft mini-games using WorldQL is very similar to using WorldQL to develop multiplayer for stand-alone titles. If you're interesting in
+trying it out when it's ready, [be sure to join our Discord to get updates first](https://discord.gg/tDZkXQPzEw).
 
 ## Conclusions
 
-Thanks for reading this article! Feel free to check out our GitHub repository for the Mammoth Minecraft server and join WorldQL's Discord!
+Thanks for reading this article! Feel free to check out our [GitHub repository for the Mammoth Minecraft server plugin](https://github.com/WorldQL/mammoth) and [join WorldQL's Discord](https://discord.gg/tDZkXQPzEw)!
 
 
 <h2 id="comments">Comments</h2>

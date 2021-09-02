@@ -5,7 +5,7 @@
 	
 	<link href="https://www.worldql.com/feed/feed.xml" rel="self"/>
 	<link href="https://www.worldql.com/"/>
-	<updated>2021-08-29T00:00:00Z</updated>
+	<updated>2021-09-02T00:00:00Z</updated>
 	<id>https://www.worldql.com/</id>
 	<author>
 		<name>WorldQL Team</name>
@@ -15,12 +15,11 @@
 	<entry>
 		<title>How we built an auto-scalable Minecraft server for 1000+ players using WorldQL&#39;s spatial database</title>
 		<link href="https://www.worldql.com/posts/2021-08-worldql-scalable-minecraft/"/>
-		<updated>2021-08-29T00:00:00Z</updated>
+		<updated>2021-09-02T00:00:00Z</updated>
 		<id>https://www.worldql.com/posts/2021-08-worldql-scalable-minecraft/</id>
-		<content type="html">&lt;p&gt;DRAFT COPY. PLZ DO NOT SHARE&lt;/p&gt;
-&lt;h2 id=&quot;minecraft&#39;s-multiplayer-performance-problems&quot;&gt;Minecraft&#39;s multiplayer performance problems &lt;a class=&quot;direct-link&quot; href=&quot;https://www.worldql.com/posts/2021-08-worldql-scalable-minecraft/#minecraft&#39;s-multiplayer-performance-problems&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
+		<content type="html">&lt;h2 id=&quot;minecraft&#39;s-multiplayer-performance-problems&quot;&gt;Minecraft&#39;s multiplayer performance problems &lt;a class=&quot;direct-link&quot; href=&quot;https://www.worldql.com/posts/2021-08-worldql-scalable-minecraft/#minecraft&#39;s-multiplayer-performance-problems&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;Minecraft&#39;s server software is single-threaded, meaning it must process all events in the world sequentially on a single CPU core.
-Even on the most powerful computers a standard Minecraft server will struggle to keep up with over 200 players. Too many players attempting to load too much world will this cause the server &lt;a href=&quot;https://minecraft.fandom.com/wiki/Tick#Game_tick&quot;&gt;tick rate&lt;/a&gt; to plummet to unplayable levels.
+Even on the most powerful computers, a standard Minecraft server will struggle to keep up with over 200 players. Too many players attempting to load too much of the world will cause the server &lt;a href=&quot;https://minecraft.fandom.com/wiki/Tick#Game_tick&quot;&gt;tick rate&lt;/a&gt; to plummet to unplayable levels.
 YouTuber SalC1 made a &lt;a href=&quot;https://www.youtube.com/watch?v=MBpN679o5Yk&quot;&gt;video&lt;/a&gt; talking about this issue which has garnered nearly a million views.&lt;/p&gt;
 &lt;p&gt;Back at the beginning of the 2020 quarantine I became interested in the idea of a supermassive Minecraft server, one with thousands of players unimpeded by lag.
 This was not possible at the time due to the limitations of Minecraft&#39;s server software, so I decided to build a way to share player load across multiple server processes. I named this project &amp;quot;Mammoth&amp;quot;.&lt;/p&gt;
@@ -48,7 +47,7 @@ There also needed to be a message-passing backend that allowed player movement p
 &lt;p&gt;I couldn&#39;t find any existing product with these qualities. I found incomplete attempts to use SpatialOS for Minecraft scaling, and I considered using it for this project. However, their license turned me off.&lt;/p&gt;
 &lt;p&gt;To meet these requirements, I started work on WorldQL. It&#39;s a real-time, scriptable spatial database built for multiplayer games.
 WorldQL can replace traditional game servers or be used to load balance existing ones.&lt;/p&gt;
-&lt;p&gt;If you&#39;re a game developer or this just sounds interesting to you, please be sure to join our Discord server.&lt;/p&gt;
+&lt;p&gt;If you&#39;re a game developer or this just sounds interesting to you, please be sure to join &lt;a href=&quot;https://discord.gg/tDZkXQPzEw&quot;&gt;our Discord server&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;The new version of Mammoth uses WorldQL to store all permanent world changes and pass real-time player information (such as location) between servers.
 Minecraft game servers communicate with WorldQL using &lt;a href=&quot;https://zeromq.org/&quot;&gt;ZeroMQ&lt;/a&gt; TCP push/pull sockets.&lt;/p&gt;
 &lt;h2 id=&quot;mammoth&#39;s-architecture&quot;&gt;Mammoth&#39;s architecture &lt;a class=&quot;direct-link&quot; href=&quot;https://www.worldql.com/posts/2021-08-worldql-scalable-minecraft/#mammoth&#39;s-architecture&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
@@ -61,7 +60,7 @@ Minecraft game servers communicate with WorldQL using &lt;a href=&quot;https://z
 &lt;p&gt;&lt;img src=&quot;https://www.worldql.com/img/mammoth-arch.png&quot; alt=&quot;WorldQL architecture diagram&quot; /&gt;&lt;/p&gt;
 &lt;p&gt;With this setup, a player can connect to &lt;strong&gt;any&lt;/strong&gt; of the Minecraft servers and receive the same world and player data. Optionally, a server admin can choose to put the Minecraft servers behind a proxy, so they all share a single external IP/port.&lt;/p&gt;
 &lt;h2 id=&quot;part-1%3A-synchronizing-player-positions&quot;&gt;Part 1: Synchronizing player positions &lt;a class=&quot;direct-link&quot; href=&quot;https://www.worldql.com/posts/2021-08-worldql-scalable-minecraft/#part-1%3A-synchronizing-player-positions&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;To broadcast player movement between servers, Mammoth uses WorldQL&#39;s location-based pub/sub messaging. Minecraft server follows a simple two-step process:&lt;/p&gt;
+&lt;p&gt;To broadcast player movement between servers, Mammoth uses WorldQL&#39;s location-based pub/sub messaging. This is a simple two-step process:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Minecraft servers continuously report their players&#39; locations to the WorldQL server.&lt;/li&gt;
 &lt;li&gt;Servers receive update messages about players in locations they have loaded.&lt;/li&gt;
@@ -77,7 +76,6 @@ For example, when &lt;em&gt;Left Player&lt;/em&gt; moves in front of &lt;em&gt;R
 &lt;li&gt;Because &lt;em&gt;Left Player&lt;/em&gt; is near &lt;em&gt;Right Player&lt;/em&gt;, WorldQL sends a message to Right Player&#39;s server.&lt;/li&gt;
 &lt;li&gt;&lt;em&gt;Right Player&lt;/em&gt;&#39;s server receives the message and generates client-bound packets to make &lt;em&gt;Left Player&lt;/em&gt; appear.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;You can run this demo on your own machine!&lt;/p&gt;
 &lt;h2 id=&quot;part-2%3A-synchronizing-blocks-and-the-world&quot;&gt;Part 2: Synchronizing blocks and the world &lt;a class=&quot;direct-link&quot; href=&quot;https://www.worldql.com/posts/2021-08-worldql-scalable-minecraft/#part-2%3A-synchronizing-blocks-and-the-world&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;Mammoth tracks the authoritative version of the Minecraft world using WorldQL Records, a data structure designed for permanent world alterations.
 In Mammoth, no single Minecraft server is responsible for storing the world. All block changes from the base seed are centrally stored in WorldQL. These changes are indexed by chunk coordinate and time, so a Minecraft server can request only the updates it needs since it last synced a chunk.&lt;/p&gt;
@@ -85,23 +83,33 @@ In Mammoth, no single Minecraft server is responsible for storing the world. All
 &lt;video controls=&quot;&quot;&gt;
     &lt;source src=&quot;https://www.worldql.com/img/minecraft-cross-server-blocks.mp4&quot; type=&quot;video/mp4&quot; /&gt;
 &lt;/video&gt;
-&lt;p&gt;When a new Minecraft server is created, it &amp;quot;catches up&amp;quot; with the current version of the world. Prior to recording the video below, I build a cute desert home then &lt;strong&gt;completely deleted this my Minecraft server&#39;s world files&lt;/strong&gt;. It was still able to quickly sync the world from WorldQL. Normally this happens automatically, but I triggered it using Mammoth&#39;s /refreshworld command so I can show you.&lt;/p&gt;
+&lt;p&gt;When a new Minecraft server is created, it &amp;quot;catches up&amp;quot; with the current version of the world. Prior to recording the video below, I built a cute desert home then &lt;strong&gt;completely deleted my Minecraft server&#39;s world files&lt;/strong&gt;. It was able to quickly sync the world from WorldQL. Normally this happens automatically, but I triggered it using Mammoth&#39;s /refreshworld command so I can show you.&lt;/p&gt;
 &lt;video controls=&quot;&quot;&gt;
   &lt;source src=&quot;https://www.worldql.com/img/minecraft-world-sync-catchup.mp4&quot; type=&quot;video/mp4&quot; /&gt;
 &lt;/video&gt;
 &lt;p&gt;Mammoth&#39;s world synchronization is incomplete for the latest 1.17.1 update. We&#39;re planning to introduce redstone, hostile mob, and weapon support ASAP.&lt;/p&gt;
 &lt;h2 id=&quot;performance-gains&quot;&gt;Performance gains &lt;a class=&quot;direct-link&quot; href=&quot;https://www.worldql.com/posts/2021-08-worldql-scalable-minecraft/#performance-gains&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;While still a work in progress, Mammoth offers considerable performance benefits over standard Minecraft servers. It&#39;s particularly good for handling very high player counts.&lt;/p&gt;
-&lt;p&gt;Here&#39;s a demonstration showcasing 2000 cross-server players, this simulation is functionally identical to real player load. The server TPS never dips below 20 (perfect) and I&#39;m running the whole thing on my laptop.&lt;/p&gt;
+&lt;p&gt;Here&#39;s a demonstration showcasing 1000 cross-server players, this simulation is functionally identical to real player load. The server TPS never dips below 20 (perfect) and I&#39;m running the whole thing on my laptop.&lt;/p&gt;
+&lt;p&gt;These simulated players are created by a loopback process which:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Receives WorldQL player movement queries.&lt;/li&gt;
+&lt;li&gt;Modifies their location and name 1000 times and sends them back to the server.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;This stress test results in the player seeing a wall of copycats:&lt;/p&gt;
+&lt;video controls=&quot;&quot;&gt;
+  &lt;source src=&quot;https://www.worldql.com/img/mammoth-stress-test.mp4&quot; type=&quot;video/mp4&quot; /&gt;
+&lt;/video&gt;
+&lt;p&gt;Mammoth pushes Minecraft server performance further than ever and will enable entirely new massively-multiplayer experiences. Keep in mind this demo was ran and recorded on a Macbook and performs even better on a real server.&lt;/p&gt;
 &lt;h2 id=&quot;coming-soon%3A-program-entire-minecraft-mini-games-inside-worldql-using-javascript&quot;&gt;Coming soon: Program entire Minecraft mini-games inside WorldQL using JavaScript &lt;a class=&quot;direct-link&quot; href=&quot;https://www.worldql.com/posts/2021-08-worldql-scalable-minecraft/#coming-soon%3A-program-entire-minecraft-mini-games-inside-worldql-using-javascript&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;Powered by the V8 JavaScript engine, WorldQL&#39;s scripting environment allows you
 to develop Minecraft mini-games without compiling your own server plugin.
 This means you don&#39;t have to restart or reload your server with every code change, allowing you to develop fast.&lt;/p&gt;
 &lt;p&gt;As an added bonus, every Minecraft mini-game you write will be scalable across multiple servers, just like our &amp;quot;vanilla&amp;quot; experience.&lt;/p&gt;
-&lt;p&gt;The experience of developing Minecraft mini-games using WorldQL is very similar to using WorldQL to develop multiplayer for stand-alone titles. If you&#39;re interesting in
-trying it out when it&#39;s ready, be sure to join our Discord to get updates first.&lt;/p&gt;
+&lt;p&gt;The process of developing Minecraft mini-games using WorldQL is very similar to using WorldQL to develop multiplayer for stand-alone titles. If you&#39;re interesting in
+trying it out when it&#39;s ready, &lt;a href=&quot;https://discord.gg/tDZkXQPzEw&quot;&gt;be sure to join our Discord to get updates first&lt;/a&gt;.&lt;/p&gt;
 &lt;h2 id=&quot;conclusions&quot;&gt;Conclusions &lt;a class=&quot;direct-link&quot; href=&quot;https://www.worldql.com/posts/2021-08-worldql-scalable-minecraft/#conclusions&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;Thanks for reading this article! Feel free to check out our GitHub repository for the Mammoth Minecraft server and join WorldQL&#39;s Discord!&lt;/p&gt;
+&lt;p&gt;Thanks for reading this article! Feel free to check out our &lt;a href=&quot;https://github.com/WorldQL/mammoth&quot;&gt;GitHub repository for the Mammoth Minecraft server plugin&lt;/a&gt; and &lt;a href=&quot;https://discord.gg/tDZkXQPzEw&quot;&gt;join WorldQL&#39;s Discord&lt;/a&gt;!&lt;/p&gt;
 &lt;h2 id=&quot;comments&quot;&gt;Comments&lt;/h2&gt;
 Reddit links will go here
 </content>
