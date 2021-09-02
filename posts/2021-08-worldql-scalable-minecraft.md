@@ -134,5 +134,5 @@ Thanks for reading this article! Feel free to check out our [GitHub repository f
 
 <h2 id="comments">Comments</h2>
 
-Reddit links will go here
+[/r/gamedev](https://www.reddit.com/r/gamedev/comments/pgoa7q/how_we_built_an_autoscalable_minecraft_server_for/)
 
