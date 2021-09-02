@@ -87,7 +87,7 @@ In Mammoth, no single Minecraft server is responsible for storing the world. All
 &lt;video controls=&quot;&quot;&gt;
   &lt;source src=&quot;https://www.worldql.com/img/minecraft-world-sync-catchup.mp4&quot; type=&quot;video/mp4&quot; /&gt;
 &lt;/video&gt;
-&lt;p&gt;This means a Minecraft server can &lt;em&gt;dynamically auto-scale&lt;/em&gt;; server instances can be created and destroyed to match demand.&lt;/p&gt;
+&lt;p&gt;This feature allows a Minecraft server to &lt;strong&gt;dynamically auto-scale&lt;/strong&gt;; server instances can be created and destroyed to match demand.&lt;/p&gt;
 &lt;p&gt;Mammoth&#39;s world synchronization is incomplete for the latest 1.17.1 update. We&#39;re planning to introduce redstone, hostile mob, and weapon support ASAP.&lt;/p&gt;
 &lt;h2 id=&quot;performance-gains&quot;&gt;Performance gains &lt;a class=&quot;direct-link&quot; href=&quot;https://www.worldql.com/posts/2021-08-worldql-scalable-minecraft/#performance-gains&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;While still a work in progress, Mammoth offers considerable performance benefits over standard Minecraft servers. It&#39;s particularly good for handling very high player counts.&lt;/p&gt;
