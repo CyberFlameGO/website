@@ -32,6 +32,13 @@ p:last-child {
   max-width: 700px;
 }
 
+.tmpl-post p {
+  font-size: 18px;
+}
+.tmpl-post li {
+  font-size: 18px;
+}
+
 .captionedimg {
   text-align: center;
   font-size: 14px;

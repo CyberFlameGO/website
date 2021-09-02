@@ -131,5 +131,6 @@ Thanks for reading this article! Feel free to check out our [GitHub repository f
 
 
 <h2 id="comments">Comments</h2>
+
 Reddit links will go here
 
