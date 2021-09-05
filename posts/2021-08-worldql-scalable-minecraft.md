@@ -115,7 +115,7 @@ This stress test results in the player seeing a wall of copycats:
   <source src="/img/mammoth-stress-test.mp4" type="video/mp4">
 </video>
 
-Mammoth pushes Minecraft server performance further than ever and will enable entirely new massively-multiplayer experiences. Keep in mind this demo **exists only to show off the efficiency of the message broker and packet code**, this is not as stressing as 1000 real players connecting. Stay tuned for a real-player demo.
+Mammoth pushes Minecraft server performance further than ever and will enable entirely new massively-multiplayer experiences. Keep in mind this demo **exists only to show off the efficiency of the message broker and packet code**, this is not as stressing as 1000 real players connecting. Stay tuned for a demo featuring actual human player load.
 
 ## Coming soon: Program entire Minecraft mini-games inside WorldQL using JavaScript
 Powered by the V8 JavaScript engine, WorldQL's scripting environment allows you
