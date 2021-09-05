@@ -132,7 +132,7 @@ In Mammoth, no single Minecraft server is responsible for storing the world. All
 <p>Mammoth's world synchronization is incomplete for the latest 1.17.1 update. We're planning to introduce redstone, hostile mob, and weapon support ASAP.</p>
 <h2 id="performance-gains">Performance gains <a class="direct-link" href="#performance-gains">#</a></h2>
 <p>While still a work in progress, Mammoth offers considerable performance benefits over standard Minecraft servers. It's particularly good for handling very high player counts.</p>
-<p>Here's a demonstration showcasing 1000 cross-server players, this simulation is functionally identical to real player load. The server TPS never dips below 20 (perfect) and I'm running the whole thing on my laptop.</p>
+<p>Here's a demonstration showcasing 1000 cross-server players, this simulation is functionally identical to real cross-server player load. The server TPS never dips below 20 (perfect) and I'm running the whole thing on my laptop.</p>
 <p>These simulated players are created by a loopback process which:</p>
 <ol>
 <li>Receives WorldQL player movement queries.</li>
@@ -142,7 +142,7 @@ In Mammoth, no single Minecraft server is responsible for storing the world. All
 <video controls>
   <source src="/img/mammoth-stress-test.mp4" type="video/mp4">
 </video>
-<p>Mammoth pushes Minecraft server performance further than ever and will enable entirely new massively-multiplayer experiences. Keep in mind this demo was ran and recorded on a Macbook and performs even better on a real server.</p>
+<p>Mammoth pushes Minecraft server performance further than ever and will enable entirely new massively-multiplayer experiences. Keep in mind this demo <strong>exists only to show off the efficiency of the message broker and packet code</strong>, this is not as stressing as 1000 real players connecting. Stay tuned for a real-player demo.</p>
 <h2 id="coming-soon%3A-program-entire-minecraft-mini-games-inside-worldql-using-javascript">Coming soon: Program entire Minecraft mini-games inside WorldQL using JavaScript <a class="direct-link" href="#coming-soon%3A-program-entire-minecraft-mini-games-inside-worldql-using-javascript">#</a></h2>
 <p>Powered by the V8 JavaScript engine, WorldQL's scripting environment allows you
 to develop Minecraft mini-games without compiling your own server plugin.

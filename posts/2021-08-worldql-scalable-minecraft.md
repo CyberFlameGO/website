@@ -103,7 +103,7 @@ Mammoth's world synchronization is incomplete for the latest 1.17.1 update. We'r
 
 While still a work in progress, Mammoth offers considerable performance benefits over standard Minecraft servers. It's particularly good for handling very high player counts.
 
-Here's a demonstration showcasing 1000 cross-server players, this simulation is functionally identical to real player load. The server TPS never dips below 20 (perfect) and I'm running the whole thing on my laptop.
+Here's a demonstration showcasing 1000 cross-server players, this simulation is functionally identical to real cross-server player load. The server TPS never dips below 20 (perfect) and I'm running the whole thing on my laptop.
 
 These simulated players are created by a loopback process which:
 1. Receives WorldQL player movement queries.
@@ -115,7 +115,7 @@ This stress test results in the player seeing a wall of copycats:
   <source src="/img/mammoth-stress-test.mp4" type="video/mp4">
 </video>
 
-Mammoth pushes Minecraft server performance further than ever and will enable entirely new massively-multiplayer experiences. Keep in mind this demo was ran and recorded on a Macbook and performs even better on a real server.
+Mammoth pushes Minecraft server performance further than ever and will enable entirely new massively-multiplayer experiences. Keep in mind this demo **exists only to show off the efficiency of the message broker and packet code**, this is not as stressing as 1000 real players connecting. Stay tuned for a real-player demo.
 
 ## Coming soon: Program entire Minecraft mini-games inside WorldQL using JavaScript
 Powered by the V8 JavaScript engine, WorldQL's scripting environment allows you
