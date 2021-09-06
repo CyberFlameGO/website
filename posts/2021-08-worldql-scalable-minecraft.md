@@ -132,7 +132,7 @@ trying it out when it's ready, [be sure to join our Discord to get updates first
 Thanks for reading this article! Feel free to check out our [GitHub repository for the Mammoth Minecraft server plugin](https://github.com/WorldQL/mammoth) and [join WorldQL's Discord](https://discord.gg/tDZkXQPzEw)!
 
 
-<h2 id="comments">Comments</h2>
+<h2 id="comments">Comments (238)</h2>
 
-[/r/gamedev](https://www.reddit.com/r/gamedev/comments/pgoa7q/how_we_built_an_autoscalable_minecraft_server_for/)
+[/r/gamedev](https://www.reddit.com/r/gamedev/comments/pgoa7q/how_we_built_an_autoscalable_minecraft_server_for/) [Hacker News](https://news.ycombinator.com/item?id=28401224)
 
